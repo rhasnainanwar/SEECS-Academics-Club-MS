@@ -2,8 +2,6 @@
 Bootstrap Admin Template by EGrappler.com
 ------------------------------------------------------------------*/
 
-
-
 /*------------------------------------------------------------------
 [1. Global]
 */
@@ -92,24 +90,6 @@ textarea {
 	position: relative;
 	top: 2px;
 }
-
-.navbar .search-query {
-	background-color: #444;
-	width: 150px;
-	font-size: 11px;
-	font-weight: bold;
-}
-
-.navbar .search-query::-webkit-input-placeholder {
-    color: #666;
-}
-
-.navbar .search-query:-moz-placeholder {
-    color: #666;
-}
-
-.navbar-search .search-query { background:#008866; border:0; color:#fff; line-height:normal;}
-
 
 /*------------------------------------------------------------------
 [3. Subnavbar / .subnavbar]
@@ -243,9 +223,6 @@ textarea {
 }
 
 
-
-
-
 /*------------------------------------------------------------------
 [4. Main / .main]
 */
@@ -255,7 +232,6 @@ textarea {
 	
 	border-bottom: 1px solid #000;
 }
-
 
 
 /*------------------------------------------------------------------
