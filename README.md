@@ -6,8 +6,8 @@ Working Progress
 -------
 - [x] Manage files and paths
 - [x] `push` initial build
-- [] Change content
-- [] Create sign up form
+- [ ] Change content
+- [ ] Create sign up form
 
 Dependencies
 ------
