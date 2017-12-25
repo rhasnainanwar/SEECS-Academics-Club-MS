@@ -6,6 +6,7 @@ Working Progress
 -------
 - [x] Manage files and paths
 - [x] `push` initial build
+- [x] ERD
 - [ ] Change content
 - [ ] Create sign up form
 
