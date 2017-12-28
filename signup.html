@@ -59,39 +59,94 @@
 	
 </div> <!-- /navbar -->
 
-
 <div class="account-container register">
-	
 	<div class="content clearfix">
-		
 		<form action="signup.html#" method="post">
-		
-			<h1>Signup for your SAC Account</h1>			
+			<h1>Signup for your SAC Account</h1>
 			
 			<div class="login-fields">
 				
 				<p>Provide the following details:</p>
-				
 				<div class="field">
-					<label for="name">Full Name:</label>	
-					<input type="text" id="name" name="name" value="" placeholder="Full Name" class="login">
-				</div> <!-- /field -->
+					<label for="fname">First Name:</label>	
+					<input type="text" id="fname" name="fname" value="" placeholder="First Name" class="login-row" required="true">
+				</div> 
+
+				<div class="field">
+					<label for="fname">Last Name:</label>	
+					<input type="text" id="lname" name="lname" value="" placeholder="Last Name" class="login-row" required="true">
+				</div>
+
+				<div class="field">
+					<label for="reg">Registration Number:</label>	
+					<input type="text" id="reg" name="reg" value="" placeholder="Registration Number" required="true">
+				</div>
+
+				<div class="field">
+					<label for="cell">Cell Number:</label>	
+					<input type="tel" id="cell" name="cell" value="" placeholder="Cell Number">
+				</div>
 				
 				<div class="field">
 					<label for="email">Email Address:</label>
-					<input type="text" id="email" name="email" value="" placeholder="Email" class="login">
-				</div> <!-- /field -->
+					<input type="text" id="email" name="email" value="" placeholder="Email Address" required="true">
+				</div> 
 				
 				<div class="field">
 					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login">
-				</div> <!-- /field -->
+					<input type="password" id="password" name="password" value="" placeholder="Password" required="true">
+				</div> 
 				
 				<div class="field">
-					<label for="confirm_password">Confirm Password:</label>
-					<input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="login">
-				</div> <!-- /field -->
+					<label for="section" style="display: block; !important;">Select your section:</label>
+					<select class="form-control" required="true" id="section" name="section">
+						<option value=""></option>
+						<optgroup label="Computer Science">
+						    <option value="BSCS4">BSCS4</option>
+						    <option value="BSCS5">BSCS5</option>
+							<option value="BSCS6">BSCS6</option>
+							<option value="BSCS7">BSCS7</option>
+					  	</optgroup>
+						<optgroup label="Electircal Engineering">
+							<option value="BEE6">BEE6</option>
+							<option value="BEE7">BEE7</option>
+							<option value="BEE8">BEE8</option>
+						    <option value="BEE9">BEE9</option>
+					  	</optgroup>
+					  	<optgroup label="Software Engineering">
+						    <option value="BESE5">BESE5</option>
+							<option value="BESE6">BESE6</option>
+							<option value="BESE7">BESE7</option>
+							<option value="BESE8">BESE8</option>
+					  	</optgroup>
+					</select>
+				</div> 
+
+				<div class="field">
+					<p>(hold <b>ctrl</b> to select multiple)</p>
+					<label for="section" style="display: block !important;">I want to be a...</label>
+					<select class="form-control" required="true" id="role" name="role" multiple>
+						<option value="student" selected>Student</option>
+						<option value="mentor">Mentor</option>
+					</select>
+				</div>
+
+				<div class="field">
+					<label for="residence" style="display: block; !important;">Residence:</label>
+					<select class="form-control" id="residence" name="residence">
+						<option value=""></option>
+						<option value="hosteler">Hosteler</option>
+						<option value="dayschlr">Day Scholar</option>
+					</select>
+				</div> 
 				
+				<div class="field">
+					<label for="subjects" style="display: block; !important;">I can teach...</label>
+					<select class="form-control" id="subjects" name="subjects" multiple>
+						<option value="subjID">SubjName</option>
+					</select>
+				</div>
+
 			</div> <!-- /login-fields -->
 			
 			<div class="login-actions">
@@ -104,7 +159,6 @@
 				<button class="button btn btn-primary btn-large">Register</button>
 				
 			</div> <!-- .actions -->
-			
 		</form>
 		
 	</div> <!-- /content -->

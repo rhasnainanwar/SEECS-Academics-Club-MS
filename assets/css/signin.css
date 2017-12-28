@@ -2,7 +2,7 @@
 body{ background-color: #eee; color:#838383; font: 13px/1.7em 'Open Sans';}
 
 .account-container {
-	width: 380px; 
+	width: 30%; 
 	display: block;
 	margin: 60px auto 0 auto;
 	
@@ -21,12 +21,12 @@ body{ background-color: #eee; color:#838383; font: 13px/1.7em 'Open Sans';}
 	padding: 16px 28px 23px;
 } 
 
-.login-fields {
-	
-}
-
 .login-fields .field {
 	margin-bottom: 1.25em;
+}
+
+label.select {
+	display: block; !important;
 }
 
 .login-fields label {
@@ -39,8 +39,8 @@ body{ background-color: #eee; color:#838383; font: 13px/1.7em 'Open Sans';}
 	color: #8e8d8d;
 	padding: 11px 15px 10px 50px;
 	background-color: #fdfdfd;
-	width: 255px;
 	display: block;
+	width: 299px;
 	margin: 0;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }

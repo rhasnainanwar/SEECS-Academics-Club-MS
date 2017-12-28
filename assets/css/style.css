@@ -743,7 +743,6 @@ html .fc, .fc table {
 }
 .fc-button {
 	position: relative;
-	display: inline-block;
 	cursor: pointer
 }
 .fc-button-today{margin-top: 8px !important;}

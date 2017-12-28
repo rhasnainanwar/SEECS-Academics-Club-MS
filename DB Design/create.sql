@@ -7,13 +7,8 @@ CREATE TABLE helpsession (
     room VARCHAR(5),
     topics TINYTEXT,
     courseID VARCHAR(5) REFERENCES course(id),
-    incharge INT REFERENCES executive(id)
-);
-
-CREATE TABLE section (
-	id VARCHAR(6),
-    sessionID INT REFERENCES helpsession(id),
-    PRIMARY KEY(id, sessionId)
+    incharge INT REFERENCES executive(id),
+    batch VARCHAR(5)
 );
 
 CREATE TABLE student (
@@ -22,7 +17,7 @@ CREATE TABLE student (
     lname VARCHAR(25),
     email VARCHAR(35),
     cellno INT,
-    section VARCHAR(6) REFERENCES section(id)
+    batch VARCHAR(5)
 );
 
 CREATE TABLE mentor (
