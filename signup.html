@@ -123,14 +123,16 @@
 				</div> 
 
 				<div class="field">
-					<p>(hold <b>ctrl</b> to select multiple)</p>
-					<label for="section" style="display: block !important;">I want to be a...</label>
-					<select class="form-control" required="true" id="role" name="role" multiple>
-						<option value="student" selected>Student</option>
-						<option value="mentor">Mentor</option>
-					</select>
+					<label style="display: block !important;">I want to be a...</label>
+					<input type="checkbox" name="student" id="student" value="student">
+					<label for="student" style="display: inline; !important;">Student</label>
+					<input type="checkbox" name="mentor" id="mentor" value="mentor">
+        			<label for="mentor" style="display: inline; !important;">Mentor</label>
+        			<input type="checkbox" name="executive" id="executive" value="executive">
+        			<label for="executive" style="display: inline; !important;">Executive</label>
 				</div>
 
+				<div class="mentor">
 				<div class="field">
 					<label for="residence" style="display: block; !important;">Residence:</label>
 					<select class="form-control" id="residence" name="residence">
@@ -138,15 +140,34 @@
 						<option value="hosteler">Hosteler</option>
 						<option value="dayschlr">Day Scholar</option>
 					</select>
-				</div> 
+				</div>
 				
 				<div class="field">
+					<p>(hold <b>ctrl</b> to select multiple)</p>
 					<label for="subjects" style="display: block; !important;">I can teach...</label>
 					<select class="form-control" id="subjects" name="subjects" multiple>
 						<option value="subjID">SubjName</option>
 					</select>
 				</div>
+				</div>
 
+				<div class="executive">
+					<label for="role" style="display: block; !important;">Role:</label>
+					<select class="form-control" id="role" name="role">
+						<option value=""></option>
+						<option value="Human Resource Head">Human Resource Head</option>
+						<option value="Human Resource Executive">Human Resource Executive</option>
+						<option disabled>_____________</option>
+						<option value="Marketing Head">Marketing Head</option>
+						<option value="Marketing Executive">Marketing Executive</option>
+						<option disabled>_____________</option>
+						<option value="Operations Head">Operations Head</option>
+						<option value="Operations Executive">Operations Executive</option>
+						<option disabled>_____________</option>
+						<option value="Media Head">Media Head</option>
+						<option value="Media Executive">Media Executive</option>
+					</select>
+				</div>
 			</div> <!-- /login-fields -->
 			
 			<div class="login-actions">
@@ -176,6 +197,6 @@
 <script type="text/javascript" src="./assets/js/bsa-ads.js"></script>
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/signin.js"></script>
- 
+
 </body>
 </html>

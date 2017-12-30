@@ -44,7 +44,9 @@ label.select {
 	margin: 0;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
-
+.mentor, .executive {
+	display: none;
+}
 .username-field { background: url(../img/user.png) no-repeat; }
 
 .password-field { background: url(../img/password.png) no-repeat; }

@@ -7,8 +7,10 @@ Working Progress
 - [x] Manage files and paths
 - [x] `push` initial build
 - [x] ERD
+- [x] Create sign up form
+- [ ] Dynamic sign up form
+- [ ] Data entry forms
 - [ ] Change content
-- [ ] Create sign up form
 
 Dependencies
 ------
