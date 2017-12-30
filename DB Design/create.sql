@@ -11,11 +11,12 @@ CREATE TABLE helpsession (
     batch VARCHAR(5)
 );
 
-CREATE TABLE student (
+CREATE TABLE user (
 	reg INT PRIMARY KEY,
     fname VARCHAR(25),
     lname VARCHAR(25),
     email VARCHAR(35),
+    pass CHAR(64) NOT NULL,
     cellno INT,
     batch VARCHAR(5)
 );
@@ -66,6 +67,11 @@ CREATE TABLE can_teach (
     course INT REFERENCES course(id),
     strength TEXT,
     PRIMARY KEY(mentorID, course)
+);
+
+CREATE TABLE wants_to_study (
+	stdID INT REFERENCES student(id),
+    courseID INT REFERENCES course(id)
 );
 
 CREATE TABLE feedback (
