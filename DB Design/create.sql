@@ -30,18 +30,20 @@ CREATE TABLE mentor (
     studyMaterialRating FLOAT,
     timeManagementRating FLOAT,
     interationRating FLOAT,
-    QARating FLOAT
+    QARating FLOAT,
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE executive (
 	id INT REFERENCES student(id),
-    role VARCHAR(3)
+    role VARCHAR(25),
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE course (
-	id VARCHAR(5) PRIMARY KEY,
-    cname VARCHAR(45),
-    dept VARCHAR(2) # abbreviation
+	id VARCHAR(7) PRIMARY KEY,
+    cname VARCHAR(65),
+    dept VARCHAR(4) # abbreviation
 );
 
 CREATE TABLE experience (
