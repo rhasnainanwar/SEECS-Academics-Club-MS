@@ -2,12 +2,13 @@
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Welcome to SEECS Academics Club!</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="./assets/dependencies/bootstrap.min.css" rel="stylesheet">
 <link href="./assets/dependencies/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="./assets/css/style.css" rel="stylesheet">
 <link href="./assets/css/signin.css" rel="stylesheet">
+<link href="./assets/dependencies/font-awesome.css" rel="stylesheet">
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -64,9 +65,7 @@
 </div>
 
 <div class="account-container">
-  
   <div class="content clearfix">
-    
     <form action="course.php" method="post">
     
       <h1>Add Course</h1>   
@@ -77,17 +76,17 @@
         
         <div class="field">
           <label for="cid">Course ID</label>
-          <input type="text" id="cid" name="cid" placeholder="CS220">
+          <input type="text" id="cid" name="cid" placeholder="CS220" required="true">
         </div>
         
         <div class="field">
           <label for="cname">Course Name</label>
-          <input type="text" id="cname" name="cname" placeholder="Database Systems">
+          <input type="text" id="cname" name="cname" placeholder="Database Systems"  required="true">
         </div>
 
         <div class="field">
           <label for="dept" style="display: block; !important;">Offering Department:</label>
-          <select class="form-control" id="dept" name="dept">
+          <select class="form-control" id="dept" name="dept"  required="true">
             <option value=""></option>
             <option value="CS">CS</option>
             <option value="SE">SE</option>
@@ -98,50 +97,76 @@
         </div>
         
       </div> <!-- /login-fields -->                  
-        <input type="submit" value="Add" class="button btn btn-success btn-large">
+        <input type="submit" name="add" value="Add" class="button btn btn-success btn-large">
       
     </form>
     
   </div> <!-- /content -->
-  
-</div> <!-- /account-container -->
-<?php
-$mysqli = new mysqli('127.0.0.1', 'root', '', 'cogman');
+  <?php
+	$mysqli = new mysqli('127.0.0.1', 'root', '', 'cogman');
 
-if ($mysqli->connect_error) {
-    die('Connect Error (' . $mysqli->connect_errno . ') '
-            . $mysqli->connect_error);
-}
-$sql = "INSERT INTO course (id, cname, dept) VALUES ('$_POST[cid]','$_POST[cname]','$_POST[dept]')";
-mysqli_query($mysqli,$sql);
-$result = mysqli_query($mysqli,"SELECT * FROM course");
-?>
-<div class="container">
-  <h2>Courses</h2>
-  <p>This table shows the details of all the courses added into the database.</p>                                                                                      
-  <div class="table-responsive">          
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Course #</th>
-        <th>Course Name</th>
-        <th>Department</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php
-    while ($row = $result->fetch_assoc())
-	{
-		echo "<tr>";
-	    foreach($row as $value) echo "<td>$value</td>";
-	    echo "</tr>";
+	if ($mysqli->connect_error) {
+	    die('Connect Error (' . $mysqli->connect_errno . ') '
+	            . $mysqli->connect_error);
 	}
-	$mysqli->close();
-    ?>
-    </tbody>
-  </table>
+	if(isset($_POST['add'])){
+	  $sql = "INSERT INTO course (id, cname, dept) VALUES ('$_POST[cid]','$_POST[cname]','$_POST[dept]')";
+	  if(mysqli_query($mysqli,$sql)){
+	  	$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["cname"]." has been added.</div>";
+	  } else {
+	  	$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the course already exists.</div>";
+	  }
+	}
+	$result = mysqli_query($mysqli,"SELECT * FROM course");
+
+	if(isset($response)){
+		echo $response;
+	}
+?>
+</div> <!-- /account-container -->
+<!-- populate database -->
+
+<div class="container">
+      <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Courses 
+              <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                <i class="fa fa-filter"></i>
+              </span>
+            </h3>
+          </div>
+          <div class="panel-body" style="display: none;">
+            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search Courses" />
+          </div>
+          <table class="table table-hover" id="dev-table">
+            <thead>
+              <tr>
+                <th>Course #</th>
+                <th>Course Name</th>
+                <th>Department</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              if(mysqli_num_rows($result) == 0){
+              	echo "<tr><td colspan=3>No record found!</td></tr>";
+              }
+              while ($row = $result->fetch_assoc())
+              {
+                echo "<tr>";
+                  foreach($row as $value) echo "<td>$value</td>";
+                echo "</tr>";
+              }
+              $mysqli->close();
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 <div class="footer">
   <div class="footer-inner">
@@ -159,5 +184,6 @@ $result = mysqli_query($mysqli,"SELECT * FROM course");
 <!-- Placed at the end of the document so the pages load faster --> 
 <script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 
 <script src="./assets/dependencies/bootstrap.js"></script>
+<script src="./assets/js/search.js"></script>
 </body>
 </html>

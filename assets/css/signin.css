@@ -19,7 +19,7 @@ body{ background-color: #eee; color:#838383; font: 13px/1.7em 'Open Sans';}
 
 .content {
 	padding: 16px 28px 23px;
-} 
+}
 
 .login-fields .field {
 	margin-bottom: 1.25em;
@@ -33,6 +33,7 @@ label.select {
 	display: none;
 }
 
+
 .login-fields input {
 	font-family: 'Open Sans';
 	font-size: 13px;
@@ -44,6 +45,7 @@ label.select {
 	margin: 0;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
+
 .mentor, .executive {
 	display: none;
 }
@@ -58,6 +60,10 @@ label.select {
 	
 	margin-top: -1em;
 	margin-bottom: 1.25em;
+}
+
+select.subjects {
+	width: 80% !important;
 }
 
 .login-social {

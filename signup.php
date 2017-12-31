@@ -11,9 +11,9 @@
 	<link href="./assets/dependencies/font-awesome.css" rel="stylesheet">
 
 	<link href="./assets/css/css" rel="stylesheet">    
-	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
 	<link href="./assets/css/signin.css" rel="stylesheet" type="text/css">
-
+	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+	<link href="./assets/select2/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body data-post="" data-gr-c-s-loaded="true" style="">
@@ -61,7 +61,7 @@
 
 <div class="account-container register">
 	<div class="content clearfix">
-		<form action="signup.html#" method="post">
+		<form action="signup.html" method="post">
 			<h1>Signup for your SAC Account</h1>
 			
 			<div class="login-fields">
@@ -100,7 +100,7 @@
 				<div class="field">
 					<label for="section" style="display: block; !important;">Select your batch:</label>
 					<select class="form-control" required="true" id="section" name="section">
-						<option value=""></option>
+						<option value="">Please Select</option>
 						<optgroup label="Computer Science">
 						    <option value="BSCS4">BSCS4</option>
 						    <option value="BSCS5">BSCS5</option>
@@ -123,38 +123,51 @@
 				</div> 
 
 				<div class="field">
-					<label style="display: block !important;">I want to be...</label>
-					<input type="checkbox" name="student" id="student" value="student">
-					<label for="student" style="display: inline; !important;">Student</label>
+					<label style="display: block !important;">I'm also...</label>
 					<input type="checkbox" name="mentor" id="mentor" value="mentor">
-        			<label for="mentor" style="display: inline; !important;">Mentor</label>
+        			<label for="mentor" style="display: inline !important;">Mentor</label>
         			<input type="checkbox" name="executive" id="executive" value="executive">
-        			<label for="executive" style="display: inline; !important;">Executive</label>
+        			<label for="executive" style="display: inline !important;">Executive</label>
 				</div>
 
 				<div class="mentor">
 				<div class="field">
-					<label for="residence" style="display: block; !important;">Residence:</label>
+					<label for="subjects" style="display: block; !important;">I can teach...</label>
+					<select class="dropdownSearch" id="subjects" name="subjects" style="width: 80%;" multiple>
+					<?php
+						$mysqli = new mysqli('127.0.0.1', 'root', '', 'cogman');
+
+						if ($mysqli->connect_error) {
+						    die('Connect Error (' . $mysqli->connect_errno . ') ');
+						}
+						
+						$result = mysqli_query($mysqli,"SELECT id, cname FROM course");
+
+						while ($row = $result->fetch_assoc())
+		              	{
+							echo "<option value='".$row["id"]."'>".$row["cname"]."</option>";
+		              	}
+		              $mysqli->close();
+					?>
+					</select>
+				</div>
+
+				<div class="field">
+					<label for="residence" style="display: block !important;">Residence:</label>
 					<select class="form-control" id="residence" name="residence">
-						<option value=""></option>
-						<option value="hosteler">Hosteler</option>
-						<option value="dayschlr">Day Scholar</option>
+						<option value="">Please Select</option>
+						<option value="H">Hosteler</option>
+						<option value="D">Day Scholar</option>
 					</select>
 				</div>
 				
-				<div class="field">
-					<p>(hold <b>ctrl</b> to select multiple)</p>
-					<label for="subjects" style="display: block; !important;">I can teach...</label>
-					<select class="form-control" id="subjects" name="subjects" multiple>
-						<option value="subjID">SubjName</option>
-					</select>
-				</div>
+				
 				</div>
 
 				<div class="executive">
-					<label for="role" style="display: block; !important;">Role:</label>
+					<label for="role" style="display: block !important;">Role:</label>
 					<select class="form-control" id="role" name="role">
-						<option value=""></option>
+						<option value="">Please select</option>
 						<option value="Human Resource Head">Human Resource Head</option>
 						<option value="Human Resource Executive">Human Resource Executive</option>
 						<option disabled>-------------</option>
@@ -177,9 +190,9 @@
 					<label class="choice" for="Field">Agree with the Terms &amp; Conditions.</label>
 				</span>
 									
-				<button class="button btn btn-primary btn-large">Register</button>
+				<input class="button btn btn-primary btn-large" type="submit" value="Register" name="singup">
 				
-			</div> <!-- .actions -->
+			</div>
 		</form>
 		
 	</div> <!-- /content -->
@@ -197,6 +210,11 @@
 <script type="text/javascript" src="./assets/js/bsa-ads.js"></script>
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/signin.js"></script>
-
+<script src="./assets/select2/js/select2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.dropdownSearch').select2();
+});
+</script>
 </body>
 </html>
