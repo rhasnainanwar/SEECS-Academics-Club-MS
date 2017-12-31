@@ -17,12 +17,12 @@ CREATE TABLE user (
     lname VARCHAR(25),
     email VARCHAR(35),
     pass CHAR(64) NOT NULL,
-    cellno INT,
+    cellno VARCHAR(11),
     batch VARCHAR(5)
 );
 
 CREATE TABLE mentor (
-	id INT REFERENCES student(id),
+	id INT,
     residence CHAR(1), # H or D
     speechRating FLOAT,
     knowledgeRating FLOAT,
@@ -31,13 +31,16 @@ CREATE TABLE mentor (
     timeManagementRating FLOAT,
     interationRating FLOAT,
     QARating FLOAT,
-    PRIMARY KEY(id)
+    rating FLOAT,
+    PRIMARY KEY(id),
+    FOREIGN KEY (id) REFERENCES user(reg) ON DELETE CASCADE
 );
 
 CREATE TABLE executive (
-	id INT REFERENCES student(id),
+	id INT,
     role VARCHAR(25),
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    FOREIGN KEY (id) REFERENCES user(reg) ON DELETE CASCADE
 );
 
 CREATE TABLE course (
@@ -66,7 +69,7 @@ CREATE TABLE teaches (
 
 CREATE TABLE can_teach (
 	mentorID INT REFERENCES mentor(id),
-    course INT REFERENCES course(id),
+    course VARCHAR(7) REFERENCES course(id),
     strength TEXT,
     PRIMARY KEY(mentorID, course)
 );

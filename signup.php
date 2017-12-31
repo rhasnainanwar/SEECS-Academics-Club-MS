@@ -61,7 +61,7 @@
 
 <div class="account-container register">
 	<div class="content clearfix">
-		<form action="signup.html" method="post">
+		<form action="signup.php" method="post">
 			<h1>Signup for your SAC Account</h1>
 			
 			<div class="login-fields">
@@ -79,27 +79,27 @@
 
 				<div class="field">
 					<label for="reg">Registration Number:</label>	
-					<input type="text" id="reg" name="reg" value="" placeholder="Registration Number" required="true">
+					<input type="text" id="reg" name="reg" placeholder="Registration Number" required="true">
 				</div>
 
 				<div class="field">
 					<label for="cell">Cell Number:</label>	
-					<input type="tel" id="cell" name="cell" value="" placeholder="Cell Number">
+					<input type="tel" id="cell" name="cell" placeholder="Cell Number">
 				</div>
 				
 				<div class="field">
 					<label for="email">Email Address:</label>
-					<input type="text" id="email" name="email" value="" placeholder="Email Address" required="true">
+					<input type="text" id="email" name="email" pattern=".+@seecs[.]edu[.]pk" title="Enter valid SEECS email" placeholder="Email Address" required="true">
 				</div> 
 				
 				<div class="field">
 					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" required="true">
+					<input type="password" id="password" name="password" pattern=".{6,}" title="Must contain six or more characters" placeholder="Password" required="true">
 				</div> 
 				
 				<div class="field">
-					<label for="section" style="display: block; !important;">Select your batch:</label>
-					<select class="form-control" required="true" id="section" name="section">
+					<label for="batch" style="display: block; !important;">Select your batch:</label>
+					<select class="form-control" required="true" id="batch" name="batch">
 						<option value="">Please Select</option>
 						<optgroup label="Computer Science">
 						    <option value="BSCS4">BSCS4</option>
@@ -133,7 +133,7 @@
 				<div class="mentor">
 				<div class="field">
 					<label for="subjects" style="display: block; !important;">I can teach...</label>
-					<select class="dropdownSearch" id="subjects" name="subjects" style="width: 80%;" multiple>
+					<select class="dropdownSearch" id="subjects" name="subjects[]" style="width: 80%;" multiple>
 					<?php
 						$mysqli = new mysqli('127.0.0.1', 'root', '', 'cogman');
 
@@ -147,7 +147,6 @@
 		              	{
 							echo "<option value='".$row["id"]."'>".$row["cname"]."</option>";
 		              	}
-		              $mysqli->close();
 					?>
 					</select>
 				</div>
@@ -196,7 +195,53 @@
 		</form>
 		
 	</div> <!-- /content -->
-	
+
+	<?php
+		if(isset($_POST['singup'])){
+			$pass = hash('sha256', $_POST["password"]);
+			$initial = mysqli_query($mysqli, "INSERT INTO user (reg, fname, lname, email, pass, cellno, batch) VALUES ($_POST[reg],'$_POST[fname]','$_POST[lname]','$_POST[email]','$pass','$_POST[cell]','$_POST[batch]')");
+			$ment = false;
+			$exe = false;
+			if($initial && isset($_POST["mentor"])){
+				$ment = mysqli_query($mysqli, "INSERT INTO mentor (id, residence, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], '$_POST[residence]', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)");
+
+				foreach ($_POST["subjects"] as $sub){
+					mysqli_query($mysqli, "INSERT INTO can_teach (mentorid, course) VALUES ($_POST[reg], '$sub')");
+				}
+			}
+
+			if($initial && isset($_POST["executive"])){
+				$exe = mysqli_query($mysqli, "INSERT INTO executive (id, role) VALUES ($_POST[reg], '$_POST[role]')");
+			}
+
+			$exitingAccount = "SELECT user.reg FROM user WHERE user.reg=$_POST[reg] OR user.email='$_POST[email]'";
+
+			// checks if all three queries worked fine (if ran)
+			if($initial && (isset($_POST["executive"]) == $exe) && (isset($_POST["mentor"]) == $ment) ){
+				$response = "<div class='alert alert-success'><strong>Success!</strong> Account created. <a href='login.html' class='alert-link'>Login</a> to continue</div>";
+			}
+			// if one of the quries failed, it may be because the data already exists
+			else if ( mysqli_num_rows( mysqli_query($mysqli, $exitingAccount) ) != 0) {
+				$response = "<div class='alert alert-danger'><strong>Singup failed!</strong> Account already exists. <a href='login.html' class='alert-link'>Login</a> to continue.</div>";
+			}
+			// OR maybe some other errors occurred
+			else {
+				$response = "<div class='alert alert-danger'><strong>Singup failed!</strong> Some unknown error has occured, please try again..</div>";
+				# roll back
+				// As the account doesn't exist already, remove the data which is added.
+				mysqli_query($mysqli, "DELETE FROM user WHERE user.reg=$_POST[reg]");
+				mysqli_query($mysqli, "DELETE FROM mentor WHERE mentor.id=$_POST[reg]");
+				mysqli_query($mysqli, "DELETE FROM executive WHERE executive.id=$_POST[reg]");
+			}
+		}
+		$result = mysqli_query($mysqli,"SELECT * FROM course");
+
+		if(isset($response)){
+			echo $response;
+		}
+		$mysqli->close();
+	?>
+
 </div> <!-- /account-container -->
 
 

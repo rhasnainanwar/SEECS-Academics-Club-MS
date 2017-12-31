@@ -8,8 +8,9 @@ Working Progress
 - [x] `push` initial build
 - [x] ERD
 - [x] Create sign up form
-- [ ] Dynamic sign up form
+- [x] Dynamic sign up form
 - [ ] Data entry forms
+- [ ] Email system
 - [ ] Change content
 
 Dependencies
