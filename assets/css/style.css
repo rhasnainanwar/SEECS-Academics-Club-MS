@@ -474,9 +474,25 @@ textarea {
 	background: #FFF;
 }
 
+#delete_message {
+	display: none;
+	color: #eeeeee;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 90px;
+	padding: 15px 0px;
+	background-color: #ff7f74;
+	text-align: center;
+}
 
+#delete_message input {
+	margin: 5px;
+}
 
-
+.courseContainer {
+	width: 50% !important; color: #444444;
+}
 /*------------------------------------------------------------------
 [7. Error / .error-container]
 */

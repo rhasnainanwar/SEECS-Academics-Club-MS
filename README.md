@@ -9,6 +9,9 @@ Working Progress
 - [x] ERD
 - [x] Create sign up form
 - [x] Dynamic sign up form
+- [x] Dynamic sign in form
+- [x] Data deletion
+- [] Data editing
 - [ ] Data entry forms
 - [ ] Email system
 - [ ] Change content

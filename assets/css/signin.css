@@ -26,13 +26,12 @@ body{ background-color: #eee; color:#838383; font: 13px/1.7em 'Open Sans';}
 }
 
 label.select {
-	display: block; !important;
+	display: block !important;
 }
 
 .login-fields label {
 	display: none;
 }
-
 
 .login-fields input {
 	font-family: 'Open Sans';

@@ -1,3 +1,4 @@
+/* Searching */
 (function(){
     'use strict';
 	var $ = jQuery;

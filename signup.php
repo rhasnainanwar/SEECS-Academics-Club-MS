@@ -98,7 +98,7 @@
 				</div> 
 				
 				<div class="field">
-					<label for="batch" style="display: block; !important;">Select your batch:</label>
+					<label for="batch" class="select">Select your batch:</label>
 					<select class="form-control" required="true" id="batch" name="batch">
 						<option value="">Please Select</option>
 						<optgroup label="Computer Science">
@@ -123,7 +123,7 @@
 				</div> 
 
 				<div class="field">
-					<label style="display: block !important;">I'm also...</label>
+					<label class="select">I'm also...</label>
 					<input type="checkbox" name="mentor" id="mentor" value="mentor">
         			<label for="mentor" style="display: inline !important;">Mentor</label>
         			<input type="checkbox" name="executive" id="executive" value="executive">
@@ -132,7 +132,7 @@
 
 				<div class="mentor">
 				<div class="field">
-					<label for="subjects" style="display: block; !important;">I can teach...</label>
+					<label for="subjects" class="select">I can teach...</label>
 					<select class="dropdownSearch" id="subjects" name="subjects[]" style="width: 80%;" multiple>
 					<?php
 						$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
@@ -152,7 +152,7 @@
 				</div>
 
 				<div class="field">
-					<label for="residence" style="display: block !important;">Residence:</label>
+					<label for="residence" class="select">Residence:</label>
 					<select class="form-control" id="residence" name="residence">
 						<option value="">Please Select</option>
 						<option value="H">Hosteler</option>
@@ -164,7 +164,7 @@
 				</div>
 
 				<div class="executive">
-					<label for="role" style="display: block !important;">Role:</label>
+					<label for="role" class="select">Role:</label>
 					<select class="form-control" id="role" name="role">
 						<option value="">Please select</option>
 						<option value="Human Resource Head">Human Resource Head</option>
