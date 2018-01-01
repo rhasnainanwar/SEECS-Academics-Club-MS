@@ -37,7 +37,7 @@
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
 					<li class="">						
-						<a href="login.html" class="">
+						<a href="login.php" class="">
 							Login 
 						</a>
 						
@@ -135,13 +135,13 @@
 					<label for="subjects" style="display: block; !important;">I can teach...</label>
 					<select class="dropdownSearch" id="subjects" name="subjects[]" style="width: 80%;" multiple>
 					<?php
-						$mysqli = new mysqli('127.0.0.1', 'root', '', 'cogman');
+						$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
 
-						if ($mysqli->connect_error) {
-						    die('Connect Error (' . $mysqli->connect_errno . ') ');
+						if ($con->connect_error) {
+						    die('Connect Error (' . $con->connect_errno . ') ');
 						}
 						
-						$result = mysqli_query($mysqli,"SELECT id, cname FROM course");
+						$result = mysqli_query($con,"SELECT id, cname FROM course");
 
 						while ($row = $result->fetch_assoc())
 		              	{
@@ -189,7 +189,7 @@
 					<label class="choice" for="Field">Agree with the Terms &amp; Conditions.</label>
 				</span>
 									
-				<input class="button btn btn-primary btn-large" type="submit" value="Register" name="singup">
+				<input class="button btn btn-primary btn-large" type="submit" value="Register" name="signup">
 				
 			</div>
 		</form>
@@ -197,49 +197,48 @@
 	</div> <!-- /content -->
 
 	<?php
-		if(isset($_POST['singup'])){
-			$pass = hash('sha256', $_POST["password"]);
-			$initial = mysqli_query($mysqli, "INSERT INTO user (reg, fname, lname, email, pass, cellno, batch) VALUES ($_POST[reg],'$_POST[fname]','$_POST[lname]','$_POST[email]','$pass','$_POST[cell]','$_POST[batch]')");
+		if(isset($_POST['signup'])){
+			$pass = hash_hmac('sha256', $_POST["password"], 'cogman');
+			$initial = mysqli_query($con, "INSERT INTO user (reg, fname, lname, email, pass, cellno, batch) VALUES ($_POST[reg],'$_POST[fname]','$_POST[lname]','$_POST[email]','$pass','$_POST[cell]','$_POST[batch]')");
 			$ment = false;
 			$exe = false;
 			if($initial && isset($_POST["mentor"])){
-				$ment = mysqli_query($mysqli, "INSERT INTO mentor (id, residence, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], '$_POST[residence]', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)");
+				$ment = mysqli_query($con, "INSERT INTO mentor (id, residence, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], '$_POST[residence]', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)");
 
 				foreach ($_POST["subjects"] as $sub){
-					mysqli_query($mysqli, "INSERT INTO can_teach (mentorid, course) VALUES ($_POST[reg], '$sub')");
+					mysqli_query($con, "INSERT INTO can_teach (mentorid, course) VALUES ($_POST[reg], '$sub')");
 				}
 			}
 
 			if($initial && isset($_POST["executive"])){
-				$exe = mysqli_query($mysqli, "INSERT INTO executive (id, role) VALUES ($_POST[reg], '$_POST[role]')");
+				$exe = mysqli_query($con, "INSERT INTO executive (id, role) VALUES ($_POST[reg], '$_POST[role]')");
 			}
 
 			$exitingAccount = "SELECT user.reg FROM user WHERE user.reg=$_POST[reg] OR user.email='$_POST[email]'";
 
 			// checks if all three queries worked fine (if ran)
 			if($initial && (isset($_POST["executive"]) == $exe) && (isset($_POST["mentor"]) == $ment) ){
-				$response = "<div class='alert alert-success'><strong>Success!</strong> Account created. <a href='login.html' class='alert-link'>Login</a> to continue</div>";
+				$response = "<div class='alert alert-success'><strong>Success!</strong> Account created. <a href='login.php' class='alert-link'>Login</a> to continue</div>";
 			}
 			// if one of the quries failed, it may be because the data already exists
-			else if ( mysqli_num_rows( mysqli_query($mysqli, $exitingAccount) ) != 0) {
-				$response = "<div class='alert alert-danger'><strong>Singup failed!</strong> Account already exists. <a href='login.html' class='alert-link'>Login</a> to continue.</div>";
+			else if ( mysqli_num_rows( mysqli_query($con, $exitingAccount) ) != 0) {
+				$response = "<div class='alert alert-danger'><strong>Signup failed!</strong> Account already exists. <a href='login.php' class='alert-link'>Login</a> to continue.</div>";
 			}
 			// OR maybe some other errors occurred
 			else {
-				$response = "<div class='alert alert-danger'><strong>Singup failed!</strong> Some unknown error has occured, please try again..</div>";
+				$response = "<div class='alert alert-danger'><strong>Signup failed!</strong> Some unknown error has occured, please try again..</div>";
 				# roll back
 				// As the account doesn't exist already, remove the data which is added.
-				mysqli_query($mysqli, "DELETE FROM user WHERE user.reg=$_POST[reg]");
-				mysqli_query($mysqli, "DELETE FROM mentor WHERE mentor.id=$_POST[reg]");
-				mysqli_query($mysqli, "DELETE FROM executive WHERE executive.id=$_POST[reg]");
+				mysqli_query($con, "DELETE FROM user WHERE user.reg=$_POST[reg]");
+				mysqli_query($con, "DELETE FROM mentor WHERE mentor.id=$_POST[reg]");
+				mysqli_query($con, "DELETE FROM executive WHERE executive.id=$_POST[reg]");
 			}
 		}
-		$result = mysqli_query($mysqli,"SELECT * FROM course");
 
 		if(isset($response)){
 			echo $response;
 		}
-		$mysqli->close();
+		$con->close();
 	?>
 
 </div> <!-- /account-container -->
@@ -247,7 +246,7 @@
 
 <!-- Text Under Box -->
 <div class="login-extra">
-	Already have an account? <a href="login.html">Login to your account</a>
+	Already have an account? <a href="login.php">Login to your account</a>
 </div> <!-- /login-extra -->
 
 <script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 

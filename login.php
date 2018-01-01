@@ -38,7 +38,7 @@
 				<ul class="nav pull-right">
 					
 					<li class="">						
-						<a href="signup.html" class="">
+						<a href="signup.php" class="">
 							Don't have an account? Signup Now
 						</a>
 						
@@ -66,7 +66,7 @@
 	
 	<div class="content clearfix">
 		
-		<form action="login.html#" method="post">
+		<form action="login.php" method="post">
 		
 			<h1>Member Login</h1>		
 			
@@ -76,12 +76,12 @@
 				
 				<div class="field">
 					<label for="email">Email Address:</label>
-					<input type="text" id="email" name="email" pattern=".+@seecs[.]edu[.]pk" title="Enter valid SEECS email" placeholder="Email Address" required="true">
+					<input type="text" id="email" name="email" pattern=".+@seecs[.]edu[.]pk" title="Enter valid SEECS email" placeholder="Email Address" class="login username-field" required>
 				</div>
 				
 				<div class="field">
 					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login password-field">
+					<input type="password" id="password" name="password" placeholder="Password" class="login password-field" required>
 				</div> <!-- /password -->
 				
 			</div> <!-- /login-fields -->
@@ -93,18 +93,46 @@
 					<label class="choice" for="Field">Keep me signed in</label>
 				</span>
 									
-				<button class="button btn btn-success btn-large">Sign In</button>
-				
+				<input class="button btn btn-primary btn-large" type="submit" value="Log In" name="signin">
+
 			</div> <!-- .actions -->
 			
 		</form>
 		
 	</div> <!-- /content -->
-	
+	<?php
+		$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
+
+		if ($con->connect_error) {
+		    die('Connect Error (' . $con->connect_errno . ') ');
+		}
+
+		if (isset($_POST['signin'])){
+			$pass = hash_hmac('sha256', $_POST["password"], 'cogman');
+
+			$query = mysqli_query($con, "SELECT user.pass AS password FROM user WHERE user.email='$_POST[email]'")->fetch_assoc();
+
+			if ( strlen($query["password"] ) == 0) {
+				$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Account does not exist. <a href='signup.php' class='alert-link'>Signup</a> to create an account.</div>";
+			}
+			else if ( hash_equals( $query["password"], $pass )){
+				$response = "<div class='alert alert-success'><strong>Success!</strong> Account logged in.</div>";
+			}
+			else {
+				$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Incorrect password.</div>";
+			}
+
+		}
+
+		if(isset($response)){
+			echo $response;
+		}
+		$con->close();
+	?>
 </div> <!-- /account-container -->
 
 <div class="login-extra">
-	<a href="login.html#">Reset Password</a>
+	<a href="#">Reset Password</a>
 </div> <!-- /login-extra -->
 
 <script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 

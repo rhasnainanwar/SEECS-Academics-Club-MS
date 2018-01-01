@@ -103,21 +103,21 @@
     
   </div> <!-- /content -->
   <?php
-	$mysqli = new mysqli('127.0.0.1', 'root', '', 'cogman');
+	$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
 
-	if ($mysqli->connect_error) {
-	    die('Connect Error (' . $mysqli->connect_errno . ') '
-	            . $mysqli->connect_error);
+	if ($con->connect_error) {
+	    die('Connect Error (' . $con->connect_errno . ') '
+	            . $con->connect_error);
 	}
 	if(isset($_POST['add'])){
 	  $sql = "INSERT INTO course (id, cname, dept) VALUES ('$_POST[cid]','$_POST[cname]','$_POST[dept]')";
-	  if(mysqli_query($mysqli,$sql)){
+	  if(mysqli_query($con,$sql)){
 	  	$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["cname"]." has been added.</div>";
 	  } else {
 	  	$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the course already exists.</div>";
 	  }
 	}
-	$result = mysqli_query($mysqli,"SELECT * FROM course");
+	$result = mysqli_query($con,"SELECT * FROM course");
 
 	if(isset($response)){
 		echo $response;
@@ -159,7 +159,7 @@
                   foreach($row as $value) echo "<td>$value</td>";
                 echo "</tr>";
               }
-              $mysqli->close();
+              $con->close();
               ?>
             </tbody>
           </table>
