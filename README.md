@@ -11,7 +11,7 @@ Working Progress
 - [x] Dynamic sign up form
 - [x] Dynamic sign in form
 - [x] Data deletion
-- [ ] Data editing
+- [x] Data editing
 - [ ] Data entry forms
 - [ ] Email system
 - [ ] User profiles
