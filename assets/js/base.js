@@ -11,6 +11,20 @@ $(function () {
 	});
 });
 
+/* Edit Dialogue */
+$(document).ready(function(){
+	$(".fa-pencil-square-o").click(function(){
+		$("#myModal").modal('show');
+		var courseID = $(this).parents('tr').find('td:eq(0)').html();
+		var courseName = $(this).parents('tr').find('td:eq(1)').html();
+
+		document.cookie = "id=" + courseID;
+		$('.modal-title').text( 'Edit ' + courseID + ' Data');
+		$('.modal-body #cid').attr('value', courseID);
+		$('.modal-body #cname').attr('value', courseName);
+	});
+});
+
 /* Confirm */
 $(document).ready(function(){
 	$(".fa-minus-circle").click(function(){

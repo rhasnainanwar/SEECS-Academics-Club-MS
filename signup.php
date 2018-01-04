@@ -68,7 +68,7 @@
 				
 				<p>Provide the following details:</p>
 				<div class="field">
-					<label for="fname">First Name:</label>	
+					<label for="fname"> Name:</label>	
 					<input type="text" id="fname" name="fname" value="" placeholder="First Name" class="login-row" required="true">
 				</div> 
 

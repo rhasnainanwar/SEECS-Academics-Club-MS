@@ -121,6 +121,15 @@
 		}
 	}
 
+	else if(isset($_POST['edit'])){
+		$sql = "UPDATE course SET course.id = '$_POST[cid]', course.cname = '$_POST[cname]',  course.dept = '$_POST[dept]' WHERE course.id = '$_COOKIE[id]'";
+		if(mysqli_query($con,$sql)){
+			$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["cname"]." has been ddited.</div>";
+		} else {
+			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the course already exists.</div>";
+		}
+	}
+
 	else if(isset($_POST["delete"])){
 		if(mysqli_query($con, "DELETE FROM course WHERE course.id='$_COOKIE[id]'"))
 			$response = "<div class='alert alert-danger'><strong>$_COOKIE[name] deleted!</strong></div>";
@@ -176,6 +185,47 @@
         </div>
     </div>
   </div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form action="course.php" method="post">
+	        <div class="field">
+	          <label for="cid">Course ID</label>
+	          <input type="text" id="cid" name="cid" required="true">
+	        </div>
+	        
+	        <div class="field">
+	          <label for="cname">Course Name</label>
+	          <input type="text" id="cname" name="cname"  required="true">
+	        </div>
+		  	<div class="field">
+		      <label for="dept" class="select">Offering Department:</label>
+		      <select class="form-control" id="dept" name="dept"  required="true">
+		        <option value=""></option>
+		        <option value="CS">CS</option>
+		        <option value="SE">SE</option>
+		        <option value="EE">EE</option>
+		        <option value="MATH">MATH</option>
+		        <option value="BSH">Basic Sciences &amp; Humanities</option>
+		      </select>
+		    </div>
+		    <input type="submit" name="edit" value="Edit" class="button btn btn-success btn-large">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <div class="footer">
   <div class="footer-inner">
@@ -195,5 +245,6 @@
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/search.js"></script>
 <script src="./assets/js/base.js"></script>
+
 </body>
 </html>
