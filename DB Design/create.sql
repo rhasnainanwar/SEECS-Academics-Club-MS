@@ -82,7 +82,7 @@ CREATE TABLE wants_to_study (
 CREATE TABLE feedback (
 	mentorID INT REFERENCES mentor(id),
     sessID INT REFERENCES helpsession(id),
-    stdID INT REFERENCES mentor(id),
+    stdID INT REFERENCES user(id),
     speechRating FLOAT,
     knowledgeRating FLOAT,
     presentationRating FLOAT,
