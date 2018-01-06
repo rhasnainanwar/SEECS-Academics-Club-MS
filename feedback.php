@@ -34,11 +34,8 @@
 				</a>
 				
 				<ul class="dropdown-menu">
-					<li><a href="javascript:;">Profile</a></li>
-					<li><a href="javascript:;">Settings</a></li>
-					<li><a href="javascript:;">Help</a></li>
-					<li><a href="javascript:;">Logout</a></li>
-				</ul>						
+          <li><a href="login.php">Logout</a></li>
+        </ul>
 			</li>
 		</ul>
       </div>
@@ -47,27 +44,6 @@
     <!-- /container --> 
   </div>
   <!-- /navbar-inner --> 
-</div>
-<!-- /navbar -->
-<div class="subnavbar">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="course.php"><i class="icon-list-alt"></i><span>Courses</span> </a> </li>
-        <li class="subnavbar-open-right"><a href="login.php"><i class="icon-facetime-video"></i><span>Log in</span> </a></li>
-        <li><a href="signup.php"><i class="icon-code"></i><span>Sign up</span> </a> </li>
-        <li class="dropdown subnavbar-open-right"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
 </div>
 
 <div class="account-container">
@@ -120,7 +96,7 @@
       </div> <!-- /login-fields -->
       	<label for="suggestion" class="select">Suggestions: </label>
         <textarea class="form-control" id="suggestion" name="suggestion" rows="5"></textarea>
-        <input type="submit" name="submit" value="submit" class="button btn btn-success btn-large">
+        <input type="submit" name="submit" value="Submit" class="button btn btn-success btn-large">
     </form>
     
   </div> <!-- /content -->

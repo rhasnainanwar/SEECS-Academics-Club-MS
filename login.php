@@ -76,7 +76,7 @@
 				
 				<div class="field">
 					<label for="email">Email Address:</label>
-					<input type="text" id="email" name="email" pattern=".+@seecs[.]edu[.]pk" title="Enter valid SEECS email" placeholder="Email Address" class="login username-field" required>
+					<input type="text" id="email" name="email" placeholder="Email Address" class="login username-field" required>
 				</div>
 				
 				<div class="field">
@@ -110,16 +110,30 @@
 		if (isset($_POST['signin'])){
 			$pass = hash_hmac('sha256', $_POST["password"], 'cogman');
 
-			$query = mysqli_query($con, "SELECT user.pass AS password FROM user WHERE user.email='$_POST[email]'")->fetch_assoc();
-
-			if ( strlen($query["password"] ) == 0) {
-				$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Account does not exist. <a href='signup.php' class='alert-link'>Signup</a> to create an account.</div>";
-			}
-			else if ( hash_equals( $query["password"], $pass )){
-				$response = "<div class='alert alert-success'><strong>Success!</strong> Account logged in.</div>";
+			if (!strpos($_POST["email"], '@seecs.edu.pk')){
+				$query = mysqli_query($con, "SELECT admins.pass AS password FROM admins WHERE admins.username='$_POST[email]'")->fetch_assoc();
+				// admins
+				if ( strlen($query["password"] ) == 0) {
+					$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong></div>";
+				}
+				else if ( hash_equals( $query["password"], $pass )){
+					header("Location: index.html"); /* Redirect browser */
+					exit();
+				}
 			}
 			else {
-				$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Incorrect password.</div>";
+				$query = mysqli_query($con, "SELECT user.pass AS password FROM user WHERE user.email='$_POST[email]'")->fetch_assoc();
+
+				if ( strlen($query["password"] ) == 0) {
+					$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Account does not exist. <a href='signup.php' class='alert-link'>Signup</a> to create an account.</div>";
+				}
+				else if ( hash_equals( $query["password"], $pass )){
+					header("Location: profile.html"); /* Redirect browser */
+					exit();
+				}
+				else {
+					$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Incorrect password.</div>";
+				}
 			}
 
 		}

@@ -15,9 +15,7 @@
 	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
 	<link href="./assets/select2/css/select2.min.css" rel="stylesheet" />
 </head>
-
 <body data-post="" data-gr-c-s-loaded="true" style="">
-	
 	<div class="navbar navbar-fixed-top">
 	
 	<div class="navbar-inner">
@@ -89,7 +87,7 @@
 				
 				<div class="field">
 					<label for="email">Email Address:</label>
-					<input type="text" id="email" name="email" pattern=".+@seecs[.]edu[.]pk" title="Enter valid SEECS email" placeholder="Email Address" required="true">
+					<input type="email" id="email" name="email" pattern=".+@seecs[.]edu[.]pk" title="Enter valid SEECS email" placeholder="Email Address" required="true">
 				</div> 
 				
 				<div class="field">
@@ -203,10 +201,10 @@
 			$ment = false;
 			$exe = false;
 			if($initial && isset($_POST["mentor"])){
-				$ment = mysqli_query($con, "INSERT INTO mentor (id, residence, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], '$_POST[residence]', 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)");
+				$ment = mysqli_query($con, "INSERT INTO mentor (id, residence, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], '$_POST[residence]', 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)");
 
 				foreach ($_POST["subjects"] as $sub){
-					mysqli_query($con, "INSERT INTO can_teach (mentorid, course) VALUES ($_POST[reg], '$sub')");
+					mysqli_query($con, "INSERT INTO can_teach (mentorid, course, rating) VALUES ($_POST[reg], '$sub', 1.0)");
 				}
 			}
 

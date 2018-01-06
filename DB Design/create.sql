@@ -6,7 +6,7 @@ CREATE TABLE helpsession (
     stime DATETIME,
     room VARCHAR(5),
     topics TINYTEXT,
-    courseID VARCHAR(5) REFERENCES course(id),
+    courseID VARCHAR(7) REFERENCES course(id),
     incharge INT REFERENCES executive(id),
     batch VARCHAR(5)
 );
@@ -71,6 +71,7 @@ CREATE TABLE can_teach (
 	mentorID INT REFERENCES mentor(id),
     course VARCHAR(7) REFERENCES course(id),
     strength TEXT,
+    rating FLOAT,
     PRIMARY KEY(mentorID, course)
 );
 
@@ -92,4 +93,9 @@ CREATE TABLE feedback (
     QARating FLOAT,
     suggestions TEXT,
     PRIMARY KEY(stdID, mentorID, sessID)
+);
+
+CREATE TABLE admins (
+	username VARCHAR(20) PRIMARY KEY,
+    pass CHAR(64) NOT NULL
 );

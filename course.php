@@ -46,16 +46,9 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="course.php"><i class="icon-list-alt"></i><span>Courses</span> </a> </li>
-        <li class="subnavbar-open-right"><a href="login.php"><i class="icon-facetime-video"></i><span>Log in</span> </a></li>
-        <li><a href="signup.php"><i class="icon-code"></i><span>Sign up</span> </a> </li>
-        <li class="dropdown subnavbar-open-right"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-          </ul>
-        </li>
+        <li><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        <li class="active"><a href="course.php"><i class="icon-list-alt"></i><span>Courses</span> </a> </li>
+        <li><a href="mentors.php"><i class="icon-dashboard"></i><span>Mentors</span> </a> </li>
       </ul>
     </div>
     <!-- /container --> 
