@@ -16,21 +16,18 @@
 <body data-post="" data-gr-c-s-loaded="true">
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">SEECS Academics Club </a>
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.php">SEECS Academics Club </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
 			<li class="dropdown">						
-				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
+				<a href="shortcodes.php#" class="dropdown-toggle" data-toggle="dropdown">
 					<i class="icon-user"></i> 
 					Admin
 					<b class="caret"></b>
 				</a>
 				
 				<ul class="dropdown-menu">
-					<li><a href="javascript:;">Profile</a></li>
-					<li><a href="javascript:;">Settings</a></li>
-					<li><a href="javascript:;">Help</a></li>
-					<li><a href="javascript:;">Logout</a></li>
+					<li><a href="logout.php">Logout</a></li>
 				</ul>						
 			</li>
 		</ul>
@@ -46,7 +43,7 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li><a href="index.html"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
+        <li><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
         <li class="active"><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
         <li><a href="course.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
         <li><a href="mentors.php"><i class="fa fa-graduation-cap"></i><span>Mentors</span> </a></li>

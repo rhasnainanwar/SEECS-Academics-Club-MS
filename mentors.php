@@ -21,7 +21,7 @@ if ($con->connect_error) {
 <body data-post="" data-gr-c-s-loaded="true">
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.html">SEECS Academics Club </a>
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.php">SEECS Academics Club </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
 			<li class="dropdown">						
@@ -32,7 +32,7 @@ if ($con->connect_error) {
 				</a>
 				
 				<ul class="dropdown-menu">
-					<li><a href="login.php">Logout</a></li>
+					<li><a href="logout.php">Logout</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -48,7 +48,7 @@ if ($con->connect_error) {
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li><a href="index.html"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
+        <li><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
         <li><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
         <li><a href="course.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
         <li class="active"><a href="mentors.php"><i class="fa fa-graduation-cap"></i><span>Mentors</span> </a></li>
@@ -116,15 +116,15 @@ if ($con->connect_error) {
         <table class="table table-hover" id="dev-table">
           <thead>
             <tr>
-			<th>Registration</th>
-			<th>Mentor Name</th>
-			<th>Email</th>
-			<th>Phone</th>
-			<th>D/H</th>
-			<th>Course #</th>
-			<th>Course</th>
-			<th>Topics</th>
-			<th>Rating</th>
+      			<th>Registration</th>
+      			<th>Mentor Name</th>
+      			<th>Email</th>
+      			<th>Phone</th>
+      			<th>D/H</th>
+      			<th>Course #</th>
+      			<th>Course</th>
+      			<th>Topics</th>
+      			<th>Rating</th>
            	</tr>
           </thead>
           <tbody>

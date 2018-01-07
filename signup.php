@@ -36,14 +36,7 @@
 				<ul class="nav pull-right">
 					<li class="">						
 						<a href="login.php" class="">
-							Login 
-						</a>
-						
-					</li>
-					<li class="">						
-						<a href="index.html">
-							<i class="icon-chevron-left"></i>
-							Back to Homepage
+							Have an account? Login 
 						</a>
 						
 					</li>

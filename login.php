@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -30,24 +33,15 @@
 				<span class="icon-bar"></span>
 			</a>
 			
-			<a class="brand" href="index.html">
+			<a class="brand" href="index.php">
 				SEECS Academics Club				
 			</a>		
 			
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
-					
 					<li class="">						
 						<a href="signup.php" class="">
 							Don't have an account? Signup Now
-						</a>
-						
-					</li>
-					
-					<li class="">						
-						<a href="index.html">
-							<i class="icon-chevron-left"></i>
-							Back to Homepage
 						</a>
 						
 					</li>
@@ -117,7 +111,8 @@
 					$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong></div>";
 				}
 				else if ( hash_equals( $query["password"], $pass )){
-					header("Location: index.html"); /* Redirect browser */
+					$_SESSION["email"] = $_POST["email"];
+					header("Location: index.php"); /* Redirect browser */
 					exit();
 				}
 			}
@@ -128,7 +123,8 @@
 					$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong> Account does not exist. <a href='signup.php' class='alert-link'>Signup</a> to create an account.</div>";
 				}
 				else if ( hash_equals( $query["password"], $pass )){
-					header("Location: profile.html"); /* Redirect browser */
+					$_SESSION["email"] = $_POST["email"];
+					header("Location: index.php"); /* Redirect browser */
 					exit();
 				}
 				else {
