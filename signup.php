@@ -121,6 +121,16 @@
 				</div> 
 
 				<div class="field">
+					<label for="residence" class="select">Residence:</label>
+					<select class="form-control" id="residence" name="residence">
+						<option value="">Please Select</option>
+						<option value="H">Hosteler</option>
+						<option value="D">Day Scholar</option>
+					</select>
+				</div>
+
+
+				<div class="field">
 					<label class="select">I'm also...</label>
 					<input type="checkbox" name="mentor" id="mentor" value="mentor">
         			<label for="mentor" style="display: inline !important;">Mentor</label>
@@ -147,17 +157,7 @@
 		              	}
 					?>
 					</select>
-				</div>
-
-				<div class="field">
-					<label for="residence" class="select">Residence:</label>
-					<select class="form-control" id="residence" name="residence">
-						<option value="">Please Select</option>
-						<option value="H">Hosteler</option>
-						<option value="D">Day Scholar</option>
-					</select>
-				</div>
-				
+				</div>				
 				
 				</div>
 
@@ -197,11 +197,11 @@
 	<?php
 		if(isset($_POST['signup'])){
 			$pass = hash_hmac('sha256', $_POST["password"], 'cogman');
-			$initial = mysqli_query($con, "INSERT INTO user (reg, fname, lname, email, pass, cellno, batch) VALUES ($_POST[reg],'$_POST[fname]','$_POST[lname]','$_POST[email]','$pass','$_POST[cell]','$_POST[batch]')");
+			$initial = mysqli_query($con, "INSERT INTO user (reg, fname, lname, email, pass, cellno, residence, batch) VALUES ($_POST[reg],'$_POST[fname]','$_POST[lname]','$_POST[email]','$pass','$_POST[cell]','$_POST[residence]','$_POST[batch]')");
 			$ment = false;
 			$exe = false;
 			if($initial && isset($_POST["mentor"])){
-				$ment = mysqli_query($con, "INSERT INTO mentor (id, residence, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], '$_POST[residence]', 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)");
+				$ment = mysqli_query($con, "INSERT INTO mentor (id, speechRating, knowledgeRating, presentationRating, studyMaterialRating, timeManagementRating, interationRating, QARating, rating) VALUES ($_POST[reg], 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)");
 
 				foreach ($_POST["subjects"] as $sub){
 					mysqli_query($con, "INSERT INTO can_teach (mentorid, course, rating) VALUES ($_POST[reg], '$sub', 1.0)");

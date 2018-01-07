@@ -18,12 +18,12 @@ CREATE TABLE user (
     email VARCHAR(35),
     pass CHAR(64) NOT NULL,
     cellno VARCHAR(11),
+    residence CHAR(1), # H or D
     batch VARCHAR(5)
 );
 
 CREATE TABLE mentor (
 	id INT,
-    residence CHAR(1), # H or D
     speechRating FLOAT,
     knowledgeRating FLOAT,
     presentationRating FLOAT,

@@ -4,3 +4,5 @@ select reg, fname, lname, email, cellno, residence, course.id, cname, strength, 
 # list of mentors
 SELECT reg, fname, lname, email, cellno, batch, residence, rating from user join mentor on user.reg = mentor.id;
 
+# mentors
+SELECT reg, fname, lname, email, cellno, batch, residence, role FROM user JOIN executive ON reg = id; 

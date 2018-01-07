@@ -15,13 +15,13 @@ $(function () {
 $(document).ready(function(){
 	$(".fa-pencil-square-o").click(function(){
 		$("#myModal").modal('show');
-		var courseID = $(this).parents('tr').find('td:eq(0)').html();
-		var courseName = $(this).parents('tr').find('td:eq(1)').html();
+		var id = $(this).parents('tr').find('td:eq(0)').html();
+		var name = $(this).parents('tr').find('td:eq(1)').html();
 
-		document.cookie = "id=" + courseID;
-		$('.modal-title').text( 'Edit ' + courseID + ' Data');
-		$('.modal-body #cid').attr('value', courseID);
-		$('.modal-body #cname').attr('value', courseName);
+		document.cookie = "id=" + id;
+		$('.modal-title').text( 'Edit ' + id + ' Data');
+		$('.modal-body #cid').attr('value', id);
+		$('.modal-body #cname').attr('value', name);
 	bnvc});
 });
 

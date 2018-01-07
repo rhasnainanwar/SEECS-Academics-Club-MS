@@ -48,9 +48,10 @@ if ($con->connect_error) {
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="course.php"><i class="icon-list-alt"></i><span>Courses</span> </a> </li>
-        <li class="active""><a href="mentors.php"><i class="icon-facetime-video"></i><span>Mentors</span> </a></li>
+        <li><a href="index.html"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
+        <li><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
+        <li><a href="course.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
+        <li class="active"><a href="mentors.php"><i class="fa fa-graduation-cap"></i><span>Mentors</span> </a></li>
       </ul>
     </div>
     <!-- /container --> 
