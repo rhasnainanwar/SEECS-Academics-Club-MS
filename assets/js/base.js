@@ -39,3 +39,14 @@ $(document).ready(function(){
 		})
 	})
 });
+
+/* Adding */
+$(document).ready(function(){
+	$(".fa-plus").click(function(){
+		document.cookie = "id=" + $(this).parents('tr').find('td:eq(0)').html();
+		document.cookie = "event=add";
+		document.cookie = "name=" + $(this).parents('tr').find('td:eq(1)').html();
+
+		document.location.reload(true);
+	})
+});

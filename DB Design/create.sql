@@ -77,8 +77,9 @@ CREATE TABLE can_teach (
 
 CREATE TABLE wants_to_study (
 	stdID INT REFERENCES student(id),
-    courseID INT REFERENCES course(id)
+    courseID VARCHAR(7) REFERENCES course(id)
 );
+
 
 CREATE TABLE feedback (
 	mentorID INT REFERENCES mentor(id),

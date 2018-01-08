@@ -12,9 +12,10 @@ Working Progress
 - [x] Dynamic sign in form
 - [x] Data deletion
 - [x] Data editing
-- [ ] Data entry forms
+- [x] Data entry forms
+- [x] User profiles
+- [ ] Profile Settings
 - [ ] Email system
-- [ ] User profiles
 
 Dependencies
 ------
