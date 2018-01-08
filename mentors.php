@@ -1,3 +1,21 @@
+<?php
+session_start();
+	$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
+	if ($con->connect_error) {
+	    die('Connect Error (' . $con->connect_errno . ') ');
+	}
+	$query = "SELECT username FROM admin WHERE username = '$_SESSION[name]'";
+	$result = mysqli_query($con, $query);
+
+	if ( count($_SESSION) == 0 ){
+	  header("Location: login.php"); /* Redirect browser */
+	  exit();
+	}
+	else if (!$result){
+	  header("Location: profile.php"); /* Redirect browser */
+	  exit();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -12,12 +30,6 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>
-<?php
-$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-if ($con->connect_error) {
-    die('Connect Error (' . $con->connect_errno . ')');
-}
-?>
 <body data-post="" data-gr-c-s-loaded="true">
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -26,8 +38,7 @@ if ($con->connect_error) {
         <ul class="nav pull-right">
 			<li class="dropdown">						
 				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
-					<i class="icon-user"></i> 
-					Admin
+					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
 				
@@ -202,7 +213,7 @@ $con->close();
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/search.js"></script>
 <script src="./assets/js/base.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"></script>
 
 </body>
 </html>

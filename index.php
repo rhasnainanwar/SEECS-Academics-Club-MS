@@ -1,9 +1,20 @@
 <?php
 session_start();
-if ( count($_SESSION) == 0){
-  header("Location: login.php"); /* Redirect browser */
-  exit();
-}
+$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
+  if ($con->connect_error) {
+      die('Connect Error (' . $con->connect_errno . ') ');
+  }
+  $query = "SELECT username FROM admin WHERE username = '$_SESSION[name]'";
+  $result = mysqli_query($con, $query);
+
+  if ( count($_SESSION) == 0 ){
+    header("Location: login.php"); /* Redirect browser */
+    exit();
+  }
+  else if (!$result){
+    header("Location: profile.php"); /* Redirect browser */
+    exit();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,10 +49,9 @@ if ( count($_SESSION) == 0){
     <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="index.php">SEECS Academics Club </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
-			<li class="dropdown">						
+			<li class="dropdown">
 				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
-					<i class="icon-user"></i> 
-					<?php echo $_SESSION["email"]; ?>
+					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
 				

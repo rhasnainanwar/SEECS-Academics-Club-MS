@@ -1,4 +1,9 @@
 <?php
+  session_start();
+  if ( count($_SESSION) == 0){
+    header("Location: login.php"); /* Redirect browser */
+    exit();
+  }
 	$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
 
 	if ($con->connect_error) {

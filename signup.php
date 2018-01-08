@@ -7,7 +7,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes"> 
     
 	<link href="./assets/dependencies/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="./assets/dependencies/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
 	<link href="./assets/dependencies/font-awesome.css" rel="stylesheet">
 
 	<link href="./assets/css/css" rel="stylesheet">    
@@ -122,7 +121,6 @@
 					</select>
 				</div>
 
-
 				<div class="field">
 					<label class="select">I'm also...</label>
 					<input type="checkbox" name="mentor" id="mentor" value="mentor">
@@ -153,7 +151,6 @@
 				</div>				
 				
 				</div>
-
 				<div class="executive">
 					<label for="role" class="select">Role:</label>
 					<select class="form-control" id="role" name="role">

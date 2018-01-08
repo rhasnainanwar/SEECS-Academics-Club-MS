@@ -1,3 +1,21 @@
+<?php
+session_start();
+  $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
+  if ($con->connect_error) {
+      die('Connect Error (' . $con->connect_errno . ') ');
+  }
+  $query = "SELECT username FROM admin WHERE username = '$_SESSION[name]'";
+  $result = mysqli_query($con, $query);
+
+  if ( count($_SESSION) == 0 ){
+    header("Location: login.php"); /* Redirect browser */
+    exit();
+  }
+  else if (!$result){
+    header("Location: profile.php"); /* Redirect browser */
+    exit();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -21,8 +39,7 @@
         <ul class="nav pull-right">
 			<li class="dropdown">						
 				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
-					<i class="icon-user"></i> 
-					Admin
+					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
 				
@@ -98,11 +115,6 @@
     
   </div> <!-- /content -->
   <?php
-	$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-
-	if ($con->connect_error) {
-	    die('Connect Error (' . $con->connect_errno . ')');
-	}
 	if(isset($_POST['add'])){
 		$sql = "INSERT INTO course (id, cname, dept) VALUES ('$_POST[cid]','$_POST[cname]','$_POST[dept]')";
 		if(mysqli_query($con,$sql)){

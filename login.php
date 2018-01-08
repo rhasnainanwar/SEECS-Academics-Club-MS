@@ -10,7 +10,6 @@ session_start();
     <meta name="apple-mobile-web-app-capable" content="yes"> 
     
 	<link href="./assets/dependencies/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="./assets/dependencies/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
 	<link href="./assets/dependencies/font-awesome.css" rel="stylesheet">
 
 	<link href="./assets/css/css" rel="stylesheet">    
@@ -43,10 +42,8 @@ session_start();
 						<a href="signup.php" class="">
 							Don't have an account? Signup Now
 						</a>
-						
 					</li>
 				</ul>
-				
 			</div><!--/.nav-collapse -->	
 	
 		</div> <!-- /container -->
@@ -111,7 +108,7 @@ session_start();
 					$response = "<div class='alert alert-danger'><strong>Sign in failed!</strong></div>";
 				}
 				else if ( hash_equals( $query["password"], $pass )){
-					$_SESSION["email"] = $_POST["email"];
+					$_SESSION["name"] = $_POST["email"];
 					header("Location: index.php"); /* Redirect browser */
 					exit();
 				}
@@ -124,7 +121,7 @@ session_start();
 				}
 				else if ( hash_equals( $query["password"], $pass )){
 					$_SESSION["email"] = $_POST["email"];
-					header("Location: index.php"); /* Redirect browser */
+					header("Location: profile.php"); /* Redirect browser */
 					exit();
 				}
 				else {
