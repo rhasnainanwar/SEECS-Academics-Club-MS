@@ -4,22 +4,19 @@ session_start();
 	if ($con->connect_error) {
 	    die('Connect Error (' . $con->connect_errno . ') ');
 	}
-	$query = "SELECT username FROM admin WHERE username = '$_SESSION[name]'";
-	$result = mysqli_query($con, $query);
-
 	if ( count($_SESSION) == 0 ){
 	  header("Location: login.php"); /* Redirect browser */
 	  exit();
 	}
-	else if (!$result){
-	  header("Location: profile.php"); /* Redirect browser */
-	  exit();
-	}
+  else if($_SESSION["type"] == "user"){
+    header("Location: profile.php"); /* Redirect browser */
+    exit();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Welcome to SEECS Academics Club!</title>
+<title>Mentors | SEECS Academics Club!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="./assets/dependencies/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +58,7 @@ session_start();
       <ul class="mainnav">
         <li><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
         <li><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
-        <li><a href="course.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
+        <li><a href="courses.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
         <li class="active"><a href="mentors.php"><i class="fa fa-graduation-cap"></i><span>Mentors</span> </a></li>
       </ul>
     </div>

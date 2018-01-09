@@ -4,17 +4,18 @@
 	if ($con->connect_error) {
 	    die('Connect Error (' . $con->connect_errno . ') ');
 	}
-	$query = "SELECT reg, CONCAT(fname, ' ' ,lname) AS name, email, cellno, residence, batch FROM user WHERE email = '$_SESSION[email]'";
-	$result = mysqli_query($con, $query)->fetch_assoc();
-
+	
 	if ( count($_SESSION) == 0 ){
 	  header("Location: login.php"); /* Redirect browser */
 	  exit();
 	}
-	else if (!$result){
-	  header("Location: index.php"); /* Redirect browser */
+	else if($_SESSION["type"] == "admin"){
+		header("Location: index.php"); /* Redirect browser */
 	  exit();
 	}
+
+	$query = "SELECT reg, CONCAT(fname, ' ' ,lname) AS name, email, cellno, residence, batch FROM user WHERE email = '$_SESSION[email]'";
+	$result = mysqli_query($con, $query)->fetch_assoc();
 
 	$_SESSION["name"] = $result["name"];
 	$_SESSION["id"] = $result["reg"];
@@ -45,7 +46,7 @@
       <div class="nav-collapse">
         <ul class="nav pull-right">
 			<li class="dropdown">						
-				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
@@ -67,6 +68,14 @@
 <div id="delete_message">
     <h2></h2>
     <form method="POST" action="profile.php">
+	    <input type="button" class="btn btn-primary" value="Cancel" name="cancel" id="cancel">
+	    <input type="submit" class="btn btn-danger" value="Delete" name="delete">
+    </form>
+</div>
+
+<div id="delete_message" class="user">
+    <h2></h2>
+    <form method="POST" action="deleteUser.php">
 	    <input type="button" class="btn btn-primary" value="Cancel" name="cancel" id="cancel">
 	    <input type="submit" class="btn btn-danger" value="Delete" name="delete">
     </form>
@@ -147,6 +156,7 @@
 	    if(isset($_POST["delete"])){
 			if(mysqli_query($con, "DELETE FROM wants_to_study WHERE courseID='$_COOKIE[id]'"))
 				$response = "<div class='alert alert-danger'><strong>$_COOKIE[name] deleted!</strong></div>";
+			unset($_POST["delete"]);
 		}
 		else if( isset($_COOKIE["event"]) && $_COOKIE["event"] == "add"){
 			$result = mysqli_query($con, "SELECT mentorID FROM can_teach WHERE mentorID = $_SESSION[id] && course = '$_COOKIE[id]'")->fetch_assoc();
@@ -205,7 +215,7 @@
     <div class="row">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Other Courses
+            <h3 class="panel-title">Remaining Courses
               <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
                 <i class="fa fa-filter"></i>
               </span>

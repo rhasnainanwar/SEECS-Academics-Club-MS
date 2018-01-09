@@ -4,14 +4,12 @@ $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
   if ($con->connect_error) {
       die('Connect Error (' . $con->connect_errno . ') ');
   }
-  $query = "SELECT username FROM admin WHERE username = '$_SESSION[name]'";
-  $result = mysqli_query($con, $query);
-
+  
   if ( count($_SESSION) == 0 ){
     header("Location: login.php"); /* Redirect browser */
     exit();
   }
-  else if (!$result){
+  else if($_SESSION["type"] == "user"){
     header("Location: profile.php"); /* Redirect browser */
     exit();
   }
@@ -74,7 +72,7 @@ $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
       <ul class="mainnav">
         <li class="active"><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
         <li><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
-        <li><a href="course.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
+        <li><a href="courses.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
         <li><a href="mentors.php"><i class="fa fa-graduation-cap"></i><span>Mentors</span> </a></li>
       </ul>
     </div>

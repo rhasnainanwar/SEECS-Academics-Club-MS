@@ -4,7 +4,6 @@ session_start();
   if ($con->connect_error) {
       die('Connect Error (' . $con->connect_errno . ') ');
   }
-  
   if ( count($_SESSION) == 0 ){
     header("Location: login.php"); /* Redirect browser */
     exit();
@@ -17,7 +16,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Welcome to SEECS Academics Club!</title>
+<title>Courses | SEECS Academics Club!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="./assets/dependencies/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +35,7 @@ session_start();
       <div class="nav-collapse">
         <ul class="nav pull-right">
 			<li class="dropdown">						
-				<a href="shortcodes.php#" class="dropdown-toggle" data-toggle="dropdown">
+				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
@@ -59,8 +58,8 @@ session_start();
     <div class="container">
       <ul class="mainnav">
         <li><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span> </a> </li>
-        <li class="active"><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
-        <li><a href="courses.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
+        <li><a href="executives.php"><i class="fa fa-briefcase"></i><span>Executives</span> </a> </li>
+        <li class="active"><a href="course.php"><i class="fa fa-book"></i><span>Courses</span> </a> </li>
         <li><a href="mentors.php"><i class="fa fa-graduation-cap"></i><span>Mentors</span> </a></li>
       </ul>
     </div>
@@ -79,34 +78,33 @@ session_start();
 
 <div class="account-container">
   <div class="content clearfix">
-    <form action="executives.php" method="post">
+    <form action="course.php" method="post">
     
-      <h1>Add Executives</h1>   
+      <h1>Add Course</h1>   
       
       <div class="login-fields">
         
         <div class="field">
-          <label for="reg">Registration ID</label>
-          <input type="text" id="reg" name="reg" placeholder="Registration ID" required="true">
+          <label for="cid">Course #</label>
+          <input type="text" id="cid" name="cid" placeholder="CS220" required="true">
+        </div>
+        
+        <div class="field">
+          <label for="cname">Course Name</label>
+          <input type="text" id="cname" name="cname" placeholder="Database Systems"  required="true">
         </div>
 
         <div class="field">
-			<label for="role" class="select">Role:</label>
-			<select class="form-control" id="role" name="role" required>
-				<option value="">Please select</option>
-				<option value="Human Resource Head">Human Resource Head</option>
-				<option value="Human Resource Executive">Human Resource Executive</option>
-				<option disabled>-------------</option>
-				<option value="Marketing Head">Marketing Head</option>
-				<option value="Marketing Executive">Marketing Executive</option>
-				<option disabled>-------------</option>
-				<option value="Operations Head">Operations Head</option>
-				<option value="Operations Executive">Operations Executive</option>
-				<option disabled>-------------</option>
-				<option value="Media Head">Media Head</option>
-				<option value="Media Executive">Media Executive</option>
-			</select>
-		</div>
+          <label for="dept" class="select">Offering Department:</label>
+          <select class="form-control" id="dept" name="dept"  required="true">
+            <option value=""></option>
+            <option value="CS">CS</option>
+            <option value="SE">SE</option>
+            <option value="EE">EE</option>
+            <option value="MATH">MATH</option>
+            <option value="BSH">Basic Sciences &amp; Humanities</option>
+          </select>
+        </div>
         
       </div> <!-- /login-fields -->
         <input type="submit" name="add" value="Add" class="button btn btn-success btn-large">
@@ -115,34 +113,25 @@ session_start();
   </div> <!-- /content -->
   <?php
 	if(isset($_POST['add'])){
-		$sql = "INSERT INTO executive (id, role) VALUES ($_POST[reg],'$_POST[role]')";
-		$result = mysqli_query($con, "SELECT reg FROM user WHERE reg=$_POST[reg]");
-		if(mysqli_num_rows($result) == 0){
-			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> User does not exist.</div>";
-		}
-		else if(mysqli_query($con,$sql)){
-			$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["role"]." has been added.</div>";
-		}
-		else {
-			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the executive record already exists.</div>";
+		$sql = "INSERT INTO course (id, cname, dept) VALUES ('$_POST[cid]','$_POST[cname]','$_POST[dept]')";
+		if(mysqli_query($con,$sql)){
+			$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["cname"]." has been added.</div>";
+		} else {
+			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the course already exists.</div>";
 		}
 	}
 
 	else if(isset($_POST['edit'])){
-		$sql = "UPDATE executive SET id = $_POST[cid], role = '$_POST[role]' WHERE id = $_COOKIE[id]";
-		$result = mysqli_query($con, "SELECT reg FROM user WHERE reg = $_POST[cid]");
-		if(mysqli_num_rows($result) == 0){
-			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> User does not exist.</div>";
-		}
-		else if(mysqli_query($con,$sql)){
-			$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["role"]." has been ddited.</div>";
+		$sql = "UPDATE course SET course.id = '$_POST[cid]', course.cname = '$_POST[cname]',  course.dept = '$_POST[dept]' WHERE course.id = '$_COOKIE[id]'";
+		if(mysqli_query($con,$sql)){
+			$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["cname"]." has been ddited.</div>";
 		} else {
-			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the record already exists.</div>";
+			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the course already exists.</div>";
 		}
 	}
 
 	else if(isset($_POST["delete"])){
-		if(mysqli_query($con, "DELETE FROM executive WHERE id=$_COOKIE[id]"))
+		if(mysqli_query($con, "DELETE FROM course WHERE course.id='$_COOKIE[id]'"))
 			$response = "<div class='alert alert-danger'><strong>$_COOKIE[name] deleted!</strong></div>";
 	}
 
@@ -158,30 +147,26 @@ session_start();
     <div class="row">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Executives 
+            <h3 class="panel-title">Courses 
               <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
                 <i class="fa fa-filter"></i>
               </span>
             </h3>
           </div>
           <div class="panel-body" style="display: none;">
-            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search Executives" />
+            <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Search Courses" />
           </div>
           <table class="table table-hover" id="dev-table">
             <thead>
               	<tr>
-                <th>Registration</th>
-      			<th>Name</th>
-      			<th>Email</th>
-      			<th>Phone</th>
-      			<th>Batch</th>
-      			<th>D/H</th>
-      			<th>Role</th>
+                <th>Course #</th>
+                <th>Course Name</th>
+                <th>Department</th>
              	</tr>
             </thead>
             <tbody>
             <?php
-              $result = mysqli_query($con,"SELECT reg, CONCAT(fname, lname), email, cellno, batch, residence, role FROM user JOIN executive ON reg = id");
+              $result = mysqli_query($con,"SELECT * FROM course");
               if(mysqli_num_rows($result) == 0){
               	echo "<tr><td colspan=3>No record found!</td></tr>";
               }
@@ -210,32 +195,29 @@ session_start();
         <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body">
-        <form action="executives.php" method="post">	        
+        <form action="course.php" method="post">
 	        <div class="field">
-	          <label for="cid">Registration ID</label>
-	          <input type="text" id="cid" name="cid" placeholder="Registration ID" required="true">
+	          <label for="cid">Course ID</label>
+	          <input type="text" id="cid" name="cid" required="true">
 	        </div>
-
-	        <div class="field">
-				<label for="role" class="select">Role:</label>
-				<select class="form-control" id="role" name="role" required>
-					<option value="">Please select</option>
-					<option value="Human Resource Head">Human Resource Head</option>
-					<option value="Human Resource Executive">Human Resource Executive</option>
-					<option disabled>-------------</option>
-					<option value="Marketing Head">Marketing Head</option>
-					<option value="Marketing Executive">Marketing Executive</option>
-					<option disabled>-------------</option>
-					<option value="Operations Head">Operations Head</option>
-					<option value="Operations Executive">Operations Executive</option>
-					<option disabled>-------------</option>
-					<option value="Media Head">Media Head</option>
-					<option value="Media Executive">Media Executive</option>
-				</select>
-			</div>
 	        
-	        <input type="submit" name="edit" value="Edit" class="button btn btn-success btn-large">
-	    </form>
+	        <div class="field">
+	          <label for="cname">Course Name</label>
+	          <input type="text" id="cname" name="cname"  required="true">
+	        </div>
+		  	<div class="field">
+		      <label for="dept" class="select">Offering Department:</label>
+		      <select class="form-control" id="dept" name="dept"  required="true">
+		        <option value=""></option>
+		        <option value="CS">CS</option>
+		        <option value="SE">SE</option>
+		        <option value="EE">EE</option>
+		        <option value="MATH">MATH</option>
+		        <option value="BSH">Basic Sciences &amp; Humanities</option>
+		      </select>
+		    </div>
+		    <input type="submit" name="edit" value="Edit" class="button btn btn-success btn-large">
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

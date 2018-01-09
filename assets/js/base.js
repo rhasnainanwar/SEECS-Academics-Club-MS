@@ -40,6 +40,18 @@ $(document).ready(function(){
 	})
 });
 
+/* Delete User */
+$(document).ready(function(){
+	$(".fa-times").click(function(){
+		$(".user h2").html("Are you sure you want to delete your account?");
+		$('#delete_message.user').slideDown();
+	 	console.log('sliding down');
+		$("#cancel").click(function(){
+			$(".user").slideUp();
+		})
+	})
+});
+
 /* Adding */
 $(document).ready(function(){
 	$(".fa-plus").click(function(){

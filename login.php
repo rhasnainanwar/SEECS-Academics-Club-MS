@@ -109,6 +109,7 @@ session_start();
 				}
 				else if ( hash_equals( $query["password"], $pass )){
 					$_SESSION["name"] = $_POST["email"];
+					$_SESSION["type"] = "admin";
 					header("Location: index.php"); /* Redirect browser */
 					exit();
 				}
@@ -121,6 +122,7 @@ session_start();
 				}
 				else if ( hash_equals( $query["password"], $pass )){
 					$_SESSION["email"] = $_POST["email"];
+					$_SESSION["type"] = "user";
 					header("Location: profile.php"); /* Redirect browser */
 					exit();
 				}
