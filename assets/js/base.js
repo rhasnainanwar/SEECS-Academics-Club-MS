@@ -45,10 +45,16 @@ $(document).ready(function(){
 	$(".fa-times").click(function(){
 		$(".user h2").html("Are you sure you want to delete your account?");
 		$('#delete_message.user').slideDown();
-	 	console.log('sliding down');
+
 		$("#cancel").click(function(){
 			$(".user").slideUp();
 		})
+	})
+});
+
+$(document).ready(function(){
+	$(".fa-user").click(function(){
+		$('.sess').slideDown();
 	})
 });
 

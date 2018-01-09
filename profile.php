@@ -262,7 +262,7 @@ $con->close();
   <div class="footer-inner">
     <div class="container">
       <div class="row">
-        <div class="span12"> © 2017 <a href="">SEECS Academics Club</a>.</div>
+        <div class="span12"> © 2018 <a href="">SEECS Academics Club</a>.</div>
       </div><!-- /row --> 
     </div><!-- /container --> 
   </div><!-- /footer-inner --> 

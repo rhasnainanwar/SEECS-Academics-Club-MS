@@ -34,7 +34,7 @@ session_start();
       <div class="nav-collapse">
         <ul class="nav pull-right">
 			<li class="dropdown">						
-				<a href="shortcodes.html#" class="dropdown-toggle" data-toggle="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
@@ -131,13 +131,12 @@ session_start();
       			<th>D/H</th>
       			<th>Course #</th>
       			<th>Course</th>
-      			<th>Topics</th>
       			<th>Rating</th>
            	</tr>
           </thead>
           <tbody>
           <?php
-        	$query = "SELECT reg, CONCAT(fname, ' ' ,lname), email, cellno, residence, course.id, cname, strength, can_teach.rating FROM user JOIN mentor ON user.reg = mentor.id JOIN can_teach ON mentor.id = can_teach.mentorID JOIN course ON can_teach.course = course.id";
+        	$query = "SELECT reg, CONCAT(fname, ' ' ,lname), email, cellno, residence, course.id, cname, can_teach.rating FROM user JOIN mentor ON user.reg = mentor.id JOIN can_teach ON mentor.id = can_teach.mentorID JOIN course ON can_teach.course = course.id";
 
           	if(isset($_POST["filter"])){
 	     		$dep = !empty($_POST["dept"]);
@@ -196,7 +195,7 @@ $con->close();
   <div class="footer-inner">
     <div class="container">
       <div class="row">
-        <div class="span12"> © 2017 <a href="">SEECS Academics Club</a>.</div>
+        <div class="span12"> © 2018 <a href="">SEECS Academics Club</a>.</div>
       </div><!-- /row --> 
     </div><!-- /container --> 
   </div><!-- /footer-inner --> 

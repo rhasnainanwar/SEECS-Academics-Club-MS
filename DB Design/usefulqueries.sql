@@ -16,3 +16,15 @@ SELECT id, cname, dept FROM course WHERE id NOT IN ( SELECT courseID FROM wants_
 
 # can teach
 SELECT mentorID FROM can_teach WHERE mentorID = 192135 && course = 'CS123';
+
+# executives
+SELECT reg, CONCAT(fname, ' ', lname) AS name FROM user JOIN executive ON reg = id WHERE role LIKE '%Executive';
+
+# mentors 
+SELECT reg, CONCAT(fname, ' ', lname) AS name FROM user JOIN can_teach ON mentorID = reg WHERE course = 'HU101';
+
+# suggestions
+select monthname(ftime), dayofmonth(ftime), suggestions from feedback;
+
+# count
+SELECT count(*), course FROM can_teach GROUP BY course;

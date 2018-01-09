@@ -36,7 +36,7 @@ session_start();
       <div class="nav-collapse">
         <ul class="nav pull-right">
 			<li class="dropdown">						
-				<a href="shortcodes.php#" class="dropdown-toggle" data-toggle="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<?php echo $_SESSION["name"]; ?>
 					<b class="caret"></b>
 				</a>
@@ -249,7 +249,7 @@ session_start();
   <div class="footer-inner">
     <div class="container">
       <div class="row">
-        <div class="span12"> © 2017 <a href="">SEECS Academics Club</a>.</div>
+        <div class="span12"> © 2018 <a href="">SEECS Academics Club</a>.</div>
       </div><!-- /row --> 
     </div><!-- /container --> 
   </div><!-- /footer-inner --> 

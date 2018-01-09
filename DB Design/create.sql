@@ -3,7 +3,7 @@ CREATE DATABASE cogman;
 USE cogman;
 CREATE TABLE helpsession (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-    stime DATETIME,
+    stime VARCHAR(99),
     room VARCHAR(5),
     topics TINYTEXT,
     courseID VARCHAR(7) REFERENCES course(id),
