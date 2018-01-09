@@ -11,6 +11,7 @@ CREATE TABLE helpsession (
     batch VARCHAR(5)
 );
 
+
 CREATE TABLE user (
 	reg INT PRIMARY KEY,
     fname VARCHAR(25),
@@ -77,9 +78,9 @@ CREATE TABLE can_teach (
 
 CREATE TABLE wants_to_study (
 	stdID INT REFERENCES student(id),
-    courseID VARCHAR(7) REFERENCES course(id)
+    courseID VARCHAR(7) REFERENCES course(id),
+    PRIMARY KEY (stdID, courseID)
 );
-
 
 CREATE TABLE feedback (
 	mentorID INT REFERENCES mentor(id),
@@ -93,6 +94,7 @@ CREATE TABLE feedback (
     interationRating FLOAT,
     QARating FLOAT,
     suggestions TEXT,
+    ftime timestamp,
     PRIMARY KEY(stdID, mentorID, sessID)
 );
 
