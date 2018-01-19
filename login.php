@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "init.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -92,14 +92,8 @@ session_start();
 		
 	</div> <!-- /content -->
 	<?php
-		$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-
-		if ($con->connect_error) {
-		    die('Connect Error (' . $con->connect_errno . ') ');
-		}
-
 		if (isset($_POST['signin'])){
-			$pass = hash_hmac('sha256', $_POST["password"], 'cogman');
+			$pass = hash_hmac('sha256', $_POST["password"], '');
 
 			if (!strpos($_POST["email"], '@seecs.edu.pk')){
 				$query = mysqli_query($con, "SELECT admins.pass AS password FROM admins WHERE admins.username='$_POST[email]'")->fetch_assoc();

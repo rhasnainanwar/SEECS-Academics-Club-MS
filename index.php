@@ -1,10 +1,5 @@
 <?php
-session_start();
-$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-  if ($con->connect_error) {
-      die('Connect Error (' . $con->connect_errno . ') ');
-  }
-  
+include "init.php";  
   if ( count($_SESSION) == 0 ){
     header("Location: login.php"); /* Redirect browser */
     exit();
@@ -14,7 +9,7 @@ $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
     exit();
   }
 
-  include("./assets/fusioncharts.php");
+  include("fusioncharts.php");
 ?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -142,6 +137,7 @@ $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
 
               /*JSON Encode the data to retrieve the string containing the JSON representation of the data in the array. */
 
+              #$jsonEncodedData = json_encode($arrData);
               $jsonEncodedData = json_encode($arrData);
 
               /*Create an object for the column chart. Initialize this object using the FusionCharts PHP class constructor. The constructor is used to initialize the chart type, chart id, width, height, the div id of the chart container, the data format, and the data source. */
@@ -225,132 +221,10 @@ $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
 <script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 
 <script type="text/javascript" src="./assets/js/top-bar.js"></script>
 <script type="text/javascript" src="./assets/js/bsa-ads.js"></script>
-<script src="./assets/js/fusioncharts.js" type="text/javascript"></script> 
 <script src="./assets/dependencies/bootstrap.js"></script>
+<script src="./assets/js/fusioncharts.js" type="text/javascript"></script>
+<script src="./assets/js/fusioncharts.charts.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="./assets/js/fullcalendar.min.js"></script>
-<script src="./assets/js/base.js"></script> 
-
-<script>     
-
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    pointColor: "rgba(220,220,220,1)",
-				    pointStrokeColor: "#fff",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    pointColor: "rgba(151,187,205,1)",
-				    pointStrokeColor: "#fff",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }
-
-        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
-
-
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }    
-
-        $(document).ready(function() {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        var calendar = $('#calendar').fullCalendar({
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
-          selectable: true,
-          selectHelper: true,
-          select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
-            if (title) {
-              calendar.fullCalendar('renderEvent',
-                {
-                  title: title,
-                  start: start,
-                  end: end,
-                  allDay: allDay
-                },
-                true // make the event "stick"
-              );
-            }
-            calendar.fullCalendar('unselect');
-          },
-          editable: true,
-          events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
-            {
-              title: 'EGrappler.com',
-              start: new Date(y, m, 28),
-              end: new Date(y, m, 29),
-              url: ''
-            }
-          ]
-        });
-      });
-    </script><!-- /Calendar -->
-
+<script src="./assets/js/base.js"></script>
 </body>
 </html>

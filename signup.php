@@ -1,3 +1,6 @@
+<?php
+include "init.php";
+?>
 <!DOCTYPE html>
 <html lang="en" class="gr__egrappler_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -134,12 +137,6 @@
 					<label for="subjects" class="select">I can teach...</label>
 					<select class="dropdownSearch" id="subjects" name="subjects[]" style="width: 80%;" multiple>
 					<?php
-						$con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-
-						if ($con->connect_error) {
-						    die('Connect Error (' . $con->connect_errno . ') ');
-						}
-						
 						$result = mysqli_query($con,"SELECT id, cname FROM course");
 
 						while ($row = $result->fetch_assoc())
@@ -186,7 +183,7 @@
 
 	<?php
 		if(isset($_POST['signup'])){
-			$pass = hash_hmac('sha256', $_POST["password"], 'cogman');
+			$pass = hash_hmac('sha256', $_POST["password"], '');
 			$initial = mysqli_query($con, "INSERT INTO user (reg, fname, lname, email, pass, cellno, residence, batch) VALUES ($_POST[reg],'$_POST[fname]','$_POST[lname]','$_POST[email]','$pass','$_POST[cell]','$_POST[residence]','$_POST[batch]')");
 			$ment = false;
 			$exe = false;

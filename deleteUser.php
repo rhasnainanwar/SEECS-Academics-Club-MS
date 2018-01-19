@@ -1,14 +1,9 @@
 <?php
- session_start();
+include "init.php";
 
  if ( count($_SESSION) == 0){
   header("Location: login.php"); /* Redirect browser */
   exit();
- }
-
- $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
- if ($con->connect_error) {
-    die('Connect Error (' . $con->connect_errno . ') ');
  }
 
  mysqli_query($con, "DELETE FROM user WHERE user.reg=$_SESSION[id]");
