@@ -74,7 +74,7 @@ include "init.php";
 
 <div class="account-container">
   <div class="content clearfix">
-    <form action="course.php" method="post">
+    <form action="courses.php" method="post">
     
       <h1>Add Course</h1>   
       
