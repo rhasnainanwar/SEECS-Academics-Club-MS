@@ -14,6 +14,7 @@ Working Progress
 - [x] Data editing
 - [x] Data entry forms
 - [x] User profiles
+- [ ] Helpsessions
 - [ ] Profile Settings
 - [ ] Email system
 
