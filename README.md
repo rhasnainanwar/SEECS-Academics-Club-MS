@@ -14,7 +14,8 @@ Working Progress
 - [x] Data editing
 - [x] Data entry forms
 - [x] User profiles
-- [ ] Helpsessions
+- [x] Helpsessions
+- [ ] Show revelant sessions to users
 - [ ] Profile Settings
 - [ ] Email system
 

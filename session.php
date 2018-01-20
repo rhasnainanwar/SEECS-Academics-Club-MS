@@ -8,14 +8,15 @@ include "init.php";
     header("Location: profile.php"); /* Redirect browser */
     exit();
   }
+
   else if(!isset($_GET["cid"])){
-     header("Location: index.php"); /* Redirect browser */
+     header("Location: index.php");
     exit();
   }
 
   $result = mysqli_query($con,"SELECT cname FROM course WHERE id = '$_GET[cid]'")->fetch_assoc();
   if(!$result){
-    header("Location: index.php"); /* Redirect browser */
+    header("Location: index.php");
     exit();
   }
 ?>
@@ -76,7 +77,7 @@ include "init.php";
 
 <div class="account-container">
   <div class="content clearfix">
-    <form action="session.php" method="post">
+    <form action= <?php echo '"session.php?cid='.$_GET["cid"].'"'; ?> method="post">
     
       <h1>Create a Help Session</h1>   
       
@@ -102,14 +103,9 @@ include "init.php";
         </div>
 
         <div class="field">
-          <label for="executive" class="select">Select Mentor:</label>
-          <select class="dropdownSearch" id="executive" name="executive" style="width: 80%;" required>
+          <label for="mentor" class="select">Select Mentor:</label>
+          <select class="dropdownSearch" id="mentor" name="mentor" style="width: 80%;" required>
           <?php
-            $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-
-            if ($con->connect_error) {
-                die('Connect Error (' . $con->connect_errno . ') ');
-            }
             echo "<option value=''>Please Select</option>";
             $result = mysqli_query($con,"SELECT reg, CONCAT(fname, ' ', lname) AS name FROM user JOIN can_teach ON mentorID = reg WHERE course = '$_GET[cid]'");
 
@@ -125,11 +121,6 @@ include "init.php";
           <label for="executive" class="select">Select Executive:</label>
           <select class="dropdownSearch" id="executive" name="executive" style="width: 80%;" required>
           <?php
-            $con = new mysqli('127.0.0.1', 'root', '', 'cogman');
-
-            if ($con->connect_error) {
-                die('Connect Error (' . $con->connect_errno . ') ');
-            }
             echo "<option value=''>Please Select</option>";
             $result = mysqli_query($con,"SELECT reg, CONCAT(fname, ' ', lname) AS name FROM user JOIN executive ON reg = id WHERE role LIKE '%Executive'");
 
@@ -173,11 +164,20 @@ include "init.php";
   </div> <!-- /content -->
   <?php
 	if(isset($_POST['add'])){
-		$sql = "INSERT INTO helpsession (stime, room, topics, courseID, incharge) VALUES ('$_POST[dt]','$_POST[room]','$_POST[topics]', '$_GET[cid]', $_POST[executive])";
-		if(mysqli_query($con,$sql)){
-			$response = "<div class='alert alert-success'><strong>Success!</strong> ".$_POST["cname"]." has been added.</div>";
+    $dtime = str_replace("T", " ", $_POST["dt"]);
+		$hadd = "INSERT INTO helpsession (stime, room, topics, courseID, incharge, batch) VALUES ('$dtime:00','$_POST[room]','$_POST[topics]', '$_GET[cid]', $_POST[executive], '$_POST[batch]')";
+		$init = mysqli_query($con,$hadd);
+		$sec = false;
+		if($init){
+			#get session id
+			$sess = mysqli_query($con,"SELECT id FROM helpsession ORDER BY id DESC LIMIT 1")->fetch_assoc();
+			$madd = "INSERT INTO teaches (mentorID, sessID) VALUES ($_POST[mentor], $sess[id])";
+			$sec = mysqli_query($con,$madd);
+		}
+		if($sec){
+			$response = "<div class='alert alert-success'><strong>Success!</strong></div>";
 		} else {
-			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check if the course already exists.</div>";
+			$response = "<div class='alert alert-danger'><strong>Entry failed!</strong> Kindly check the entered data.</div>";
 		}
 	}
 

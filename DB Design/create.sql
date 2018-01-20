@@ -3,14 +3,13 @@ CREATE DATABASE cogman;
 USE cogman;
 CREATE TABLE helpsession (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-    stime VARCHAR(99),
+    stime DATETIME,
     room VARCHAR(5),
     topics TINYTEXT,
     courseID VARCHAR(7) REFERENCES course(id),
     incharge INT REFERENCES executive(id),
     batch VARCHAR(5)
 );
-
 
 CREATE TABLE user (
 	reg INT PRIMARY KEY,
