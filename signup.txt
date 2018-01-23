@@ -1,0 +1,8 @@
+Dear ${NAME}, 
+Your account has been created in SEECS Academics Club!
+
+Use these credentials to log in to your account:
+Email: ${EMAIL}
+Password: ${PASSWORD}
+
+We hope you have great experience with us.

@@ -138,9 +138,7 @@ include "init.php";
 	<a href="#">Reset Password</a>
 </div> <!-- /login-extra -->
 
-<script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 
-<script type="text/javascript" src="./assets/js/top-bar.js"></script>
-<script type="text/javascript" src="./assets/js/bsa-ads.js"></script>
+<script src="./assets/dependencies/jquery-1.7.2.min.js"></script>
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/signin.js"></script>
 

@@ -206,9 +206,7 @@ include "init.php";
 <!-- Le javascript
 ================================================== --> 
 <!-- Placed at the end of the document so the pages load faster --> 
-<script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 
-<script type="text/javascript" src="./assets/js/top-bar.js"></script>
-<script type="text/javascript" src="./assets/js/bsa-ads.js"></script>
+<script src="./assets/dependencies/jquery-1.7.2.min.js"></script>
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/fusioncharts.js" type="text/javascript"></script>
 <script src="./assets/js/fusioncharts.charts.js" type="text/javascript"></script>

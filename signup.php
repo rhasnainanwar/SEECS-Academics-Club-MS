@@ -203,6 +203,9 @@ include "init.php";
 
 			// checks if all three queries worked fine (if ran)
 			if($initial && (isset($_POST["executive"]) == $exe) && (isset($_POST["mentor"]) == $ment) ){
+				$name = explode(" ", $_POST["fname"], 2);
+				
+				shell_exec('python mail.py signup '.$name[0].' '.$_POST["email"].' '.$_POST["password"]);
 				$response = "<div class='alert alert-success'><strong>Success!</strong> Account created. <a href='login.php' class='alert-link'>Login</a> to continue</div>";
 			}
 			// if one of the quries failed, it may be because the data already exists
@@ -234,9 +237,7 @@ include "init.php";
 	Already have an account? <a href="login.php">Login to your account</a>
 </div> <!-- /login-extra -->
 
-<script src="./assets/dependencies/jquery-1.7.2.min.js"></script> 
-<script type="text/javascript" src="./assets/js/top-bar.js"></script>
-<script type="text/javascript" src="./assets/js/bsa-ads.js"></script>
+<script src="./assets/dependencies/jquery-1.7.2.min.js"></script>
 <script src="./assets/dependencies/bootstrap.js"></script>
 <script src="./assets/js/signin.js"></script>
 <script src="./assets/select2/js/select2.min.js"></script>
